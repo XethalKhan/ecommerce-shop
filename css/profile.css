@@ -1,0 +1,32 @@
+.profileRow{
+	margin-top:15px;
+}
+
+#aside{
+	background-color:#ffff33;
+}
+
+#aside ul li{
+	list-style-type: none;
+}
+
+#aside a{
+	display:inline-block;
+	text-decoration:none;
+	color:black;
+	background-color:#ffff33;
+	border-radius:25px;
+	border:1px solid #ffff33;
+	margin:0px;
+	width:80%;
+}
+#aside a:hover{
+	display:inline-block;
+	text-decoration:none;
+	color:white;
+	background-color:#ff3300;
+	border-radius:25px;
+	border:1px solid #ff3300;
+	margin:0px;
+	width:80%;
+}

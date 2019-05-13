@@ -6,7 +6,7 @@
 
 			error_reporting(E_ALL);
 			require_once("db.php");
-			$crm = new DB("id8082146_root", "faksc0ece");
+			$crm = new DB("root", "root");
 			$conn = $crm->getInstance();
 
 			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM `order` WHERE c_id = :c_id AND status != 1");

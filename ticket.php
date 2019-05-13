@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	require_once("utl/db.php");
-	$crm = new DB("id8082146_root", "faksc0ece");
+	$crm = new DB("root", "root");
 	$conn = $crm->getInstance();
 
 	$test = true;

@@ -15,7 +15,7 @@
 		$errArr = array();
 		$status = true;
 
-		$crm = new DB("id8082146_root", "faksc0ece");
+		$crm = new DB("root", "root");
 		$conn = $crm->getInstance();
 
 		if(empty($gender)){

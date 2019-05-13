@@ -4,7 +4,7 @@
 		$pass = md5($_POST["tbPass"]);
 
 		require_once("db.php");
-		$crm = new DB("id8082146_root", "faksc0ece");
+		$crm = new DB("root", "root");
 		$conn = $crm->getInstance();
 		$stmt = $conn->prepare("SELECT * FROM user WHERE username = :username");
 		$stmt->bindParam(":username", $user);

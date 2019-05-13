@@ -3,7 +3,7 @@
 
 	if(isset($_POST["btnUploadOrder"])){
 	require_once("utl/db.php");
-	$crm = new DB("id8082146_root", "faksc0ece");
+	$crm = new DB("root", "root");
 	$conn = $crm->getInstance();
 
 	$query = "SELECT MAX(id) AS cnt FROM `order`";

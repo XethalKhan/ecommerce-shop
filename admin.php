@@ -29,7 +29,7 @@
 	<?php 
 			error_reporting(E_ALL);
 			require_once("utl/db.php");
-			$crm = new DB("id8082146_root", "faksc0ece");
+			$crm = new DB("root", "root");
 			$conn = $crm->getInstance();
 
 			require_once("view/header.php");

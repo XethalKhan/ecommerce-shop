@@ -2,7 +2,7 @@
 	session_start();
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
 		require_once("db.php");
-		$crm = new DB("id8082146_root", "faksc0ece");
+		$crm = new DB("root", "root");
 		$conn = $crm->getInstance();
 
 		$query = "UPDATE category SET name = :name, info = :info WHERE id = :id";

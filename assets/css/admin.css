@@ -1,0 +1,22 @@
+.admin-row{
+	margin-top:25px;
+}
+
+.admin-cat{
+	border:1px solid white;
+	border-radius: 25px;
+	text-decoration:none;
+	color:black;
+}
+
+.admin-cat:hover{
+	border:1px solid #ff9933;
+	border-radius: 25px;
+	text-decoration:none;
+	color: white;
+	background-color:#ff3300;
+}
+
+#tickets{
+	margin-top:30px;
+}

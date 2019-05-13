@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/signup.php",
+				url: "127.0.0.1/utl/signup.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -164,7 +164,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/survey.php",
+				url: "127.0.0.1/utl/survey.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -237,7 +237,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/changePass.php",
+				url: "127.0.0.1/utl/changePass.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -285,7 +285,7 @@ $(document).ready(function(){
 
 		if(status == true){
 			$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/newTicket.php",
+				url: "127.0.0.1/utl/newTicket.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -334,7 +334,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: "http://accdemo.000webhostapp.com/utl/getProducts.php",
+			url: "127.0.0.1/utl/getProducts.php",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -419,7 +419,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: "http://accdemo.000webhostapp.com/utl/getOrders.php",
+			url: "127.0.0.1/utl/getOrders.php",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -471,7 +471,7 @@ $(document).ready(function(){
 		}
 
 		$.ajax({
-			url: "http://accdemo.000webhostapp.com/utl/getTickets.php",
+			url: "127.0.0.1/utl/getTickets.php",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -511,7 +511,7 @@ $(document).ready(function(){
 	$("#ticketTable").on("click", ".solve-ticket", function(e){
 		var tid = $(this).data("id");
 		$.ajax({
-			url: "http://accdemo.000webhostapp.com/utl/solveTicket.php",
+			url: "127.0.0.1/utl/solveTicket.php",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -525,7 +525,7 @@ $(document).ready(function(){
 					var customer = $("#tbCustomer").val();
 
 					$.ajax({
-						url: "http://accdemo.000webhostapp.com/utl/getTickets.php",
+						url: "127.0.0.1/utl/getTickets.php",
 						type: "post",
 						dataType: "json",
 						data: {
@@ -570,7 +570,7 @@ $(document).ready(function(){
 	$("#ticketTable").on("click", ".dismiss-ticket", function(e){
 		var tid = $(this).data("id");
 		$.ajax({
-			url: "http://accdemo.000webhostapp.com/utl/dissmissTicket.php",
+			url: "127.0.0.1/utl/dissmissTicket.php",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -584,7 +584,7 @@ $(document).ready(function(){
 					var customer = $("#tbCustomer").val();
 
 					$.ajax({
-						url: "http://accdemo.000webhostapp.com/utl/getTickets.php",
+						url: "127.0.0.1/utl/getTickets.php",
 						type: "post",
 						dataType: "json",
 						data: {
@@ -651,7 +651,7 @@ $(document).ready(function(){
 		alert(val);
 		if(val == "Insert"){
 			$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/insertCat.php",
+				url: "127.0.0.1/utl/insertCat.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -671,7 +671,7 @@ $(document).ready(function(){
 			var id = $("#catID").val();
 
 			$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/updateCat.php",
+				url: "127.0.0.1/utl/updateCat.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -697,7 +697,7 @@ $(document).ready(function(){
 		var name = $("#tbName").val();
 
 		$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/getCat.php",
+				url: "127.0.0.1/utl/getCat.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -736,7 +736,7 @@ $(document).ready(function(){
 		var status = $("#ddlStatus option:selected").val();
 
 		$.ajax({
-				url: "http://accdemo.000webhostapp.com/utl/getUsers.php",
+				url: "127.0.0.1/utl/getUsers.php",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -910,7 +910,7 @@ $(document).ready(function(){
 		number = int => overwrite
 		*/
 		$.ajax({
-			url: "http://accdemo.000webhostapp.com/utl/addToOrder.php",
+			url: "127.0.0.1/utl/addToOrder.php",
 			type: "post",
 			dataType: "json",
 			data: {

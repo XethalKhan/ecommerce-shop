@@ -29,11 +29,12 @@
 <body class="container-fluid">
 	<?php 
 			error_reporting(E_ALL);
-			require_once("config/connection.php");
 
 			require_once("views/fixed/header.php");
 			require_once("views/fixed/login.php");
-			require_once("view/fixed/nav.php");
+			require_once("views/fixed/nav.php");
+
+			require_once("config/connection.php");
 	?>
 	<div id="content" class="row">
 		<div id="main" class="col-sm-9">
@@ -98,7 +99,7 @@
 		</div>
 	</div>
 	<?php
-			require_once("view/fixed/footer.php");
+			require_once("views/fixed/footer.php");
 	?>
 </body>
 </html>

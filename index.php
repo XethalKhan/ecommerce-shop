@@ -41,6 +41,9 @@
 			case "home":
 				require_once("views/pages/home.php");
 				break;
+			case "about":
+				require_once("views/pages/about.php");
+				break;
 			default:
 				require_once("views/pages/home.php");
 				break;

@@ -42,8 +42,8 @@
 									<option value="0">Choose . . .</option>
 									<?php 
 										$slcCat = "";
-										if(isset($_GET["cat"])){
-											$slcCat = $_GET["cat"];
+										if(isset($_GET["id"])){
+											$slcCat = $_GET["id"];
 										}
 										$stmt = $conn->prepare("SELECT * FROM category");
 										$stmt->execute();
@@ -92,13 +92,13 @@
 			<?php 
 				$c = "";
 				$catAdd = "cat_id = cat_id";
-				if(isset($_GET["cat"]) && !empty($_GET["cat"])){
-					$c = $_GET["cat"];
+				if(isset($_GET["id"]) && !empty($_GET["id"])){
+					$c = $_GET["id"];
 					$catAdd = "cat_id = :cat_id";
 				}
 				$query = "SELECT * FROM product WHERE " . $catAdd;
 				$stmt = $conn->prepare($query);
-				if(isset($_GET["cat"]) && !empty($_GET["cat"])){
+				if(isset($_GET["id"]) && !empty($_GET["id"])){
 					$stmt->bindParam(":cat_id", $c);
 				}
 				$stmt->execute();
@@ -150,7 +150,7 @@
 					$rs=$stmt->fetchall();
 					foreach($rs as $cat){
 						$n = strlen($cat->name) > 25 ? substr($cat->name, 0, 25) . ". . ." : $cat->name;
-						echo "<li><a href=\"index.php?page=products&cat=" . $cat->id . "\">" . $n ."</a></li>";
+						echo "<li><a href=\"http://" . HREF. "/products/" . $cat->id . "/\">" . $n ."</a></li>";
 					}
 				?>
 				</ul>

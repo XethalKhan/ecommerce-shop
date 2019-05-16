@@ -41,14 +41,17 @@
 
 		$page = isset($_GET["page"]) ? (empty($_GET["page"]) ? "home" : $_GET["page"]) : "home";
 		switch($page){
-			case "home":
-				require_once("views/pages/home.php");
-				break;
 			case "about":
 				require_once("views/pages/about.php");
 				break;
 			case "author":
 				require_once("views/pages/author.php");
+				break;
+			case "home":
+				require_once("views/pages/home.php");
+				break;
+			case "login":
+				require_once("views/pages/login.php");
 				break;
 			case "products":
 				require_once("views/pages/products.php");

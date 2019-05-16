@@ -1,5 +1,10 @@
 <?php 
 	session_start();
+
+	error_reporting(E_ALL);
+
+	require_once("config/config.php");
+	require_once("config/connection.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,13 +35,9 @@
 </head>
 <body class="container-fluid">
 	<?php 
-		error_reporting(E_ALL);
-
 		require_once("views/fixed/header.php");
 		require_once("views/fixed/login.php");
 		require_once("views/fixed/nav.php");
-
-		require_once("config/connection.php");
 
 		$page = isset($_GET["page"]) ? (empty($_GET["page"]) ? "home" : $_GET["page"]) : "home";
 		switch($page){

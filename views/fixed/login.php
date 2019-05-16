@@ -1,3 +1,9 @@
+<div id="headerRight" class="col-md-9">
+		<div class="row">
+			<div class="col-md-6">
+				
+			</div>
+			<div class="col-md-6" id="loginData">
 <!--AKO POSTOJI SESIJA PRIKAZATI PROFIL U SUPROTNOM LOGIN FORMU-->
 <?php if(!(isset($_SESSION["user"]))): ?>
 <form id="formLogin" method="post" action="utl/login.php" clas="form-inline">
@@ -95,3 +101,7 @@
 		</div>
 	</div>
 <?php endif ?>
+</div>
+		</div>
+	</div>
+</div>

@@ -45,7 +45,7 @@
 					foreach($rs as $prod){
 					echo "<div class=\"row product\">" .
 							"<div class=\"col-sm-4 text-center product-img\">" .
-								"<img src=\"img/prod/" . $prod->img . "\" width=\"auto\" height=\"200\"/>" .
+								"<img src=\"assets/images/" . $prod->img . "\" width=\"auto\" height=\"200\"/>" .
 							"</div>" .
 							"<div class=\"col-sm-8\">" .
 								"<div class=\"row text-center\">" .

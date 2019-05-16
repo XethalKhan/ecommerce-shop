@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/footer.css">
 
     <link rel="stylesheet" href="assets/css/start.css">
+    <link rel="stylesheet" href="assets/css/search.css">
 	<!--/STYLESHEET-->
 	<!--FONT AWESOME 5 ICONS-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -46,6 +47,9 @@
 				break;
 			case "author":
 				require_once("views/pages/author.php");
+				break;
+			case "products":
+				require_once("views/pages/products.php");
 				break;
 			default:
 				require_once("views/pages/home.php");

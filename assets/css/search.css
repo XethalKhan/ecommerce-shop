@@ -50,11 +50,11 @@
 	margin-top:10px;
 }
 
-#aside ul li{
+#asideSearch ul li{
 	list-style-type: none;
 }
 
-#aside a{
+#asideSearch a{
 	display:inline-block;
 	text-decoration:none;
 	color:black;
@@ -64,7 +64,7 @@
 	margin-top:8px;
 	width:80%;
 }
-#aside a:hover{
+#asideSearch a:hover{
 	display:inline-block;
 	text-decoration:none;
 	color:white;

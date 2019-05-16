@@ -3,9 +3,6 @@
 		$user = $_POST["tbUser"];
 		$pass = md5($_POST["tbPass"]);
 
-		require_once("db.php");
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
 		$stmt = $conn->prepare("SELECT * FROM user WHERE username = :username");
 		$stmt->bindParam(":username", $user);
 		$stmt->execute();
@@ -14,7 +11,7 @@
 			session_start();
 			if($rs->wrong > 4){
 				$_SESSION['msg'] = "Too many wrong attempts to login, please contact administrator with registred e-mail";
-				header("Location: ../login.php");
+				header("Location: http://" . HREF . "/login");
 				exit;
 			}
 			else if($rs->password == $pass){
@@ -22,7 +19,7 @@
 				$_SESSION['gid'] = $rs->grp;
 				$_SESSION['user'] = $rs->username;
 				$_SESSION['order'] = array();
-				header("Location: ../index.php");
+				header("Location: http://" . HREF . "/home");
 				exit;
 			}else{
 				$id = $rs->id;
@@ -32,12 +29,12 @@
 				$wrongPass->bindParam(":id", $id);
 				$wrongPass->execute();
 				$_SESSION['msg'] = "Wrong password, please try again";
-				header("Location: ../login.php");
+				header("Location: http://" . HREF . "/login");
 				exit;
 			}
 		}
 		else{
-			header("Location: ../signup.php");
+			header("Location: http://" . HREF . "/sign-up");
 			exit;
 		}
 	}

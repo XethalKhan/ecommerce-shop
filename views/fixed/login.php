@@ -6,7 +6,7 @@
 			<div class="col-md-6" id="loginData">
 <!--AKO POSTOJI SESIJA PRIKAZATI PROFIL U SUPROTNOM LOGIN FORMU-->
 <?php if(!(isset($_SESSION["user"]))): ?>
-<form id="formLogin" method="post" action="utl/login.php" clas="form-inline">
+<form id="formLogin" method="post" action=<?php echo "\"http://" . HREF . "/user/login\""; ?> class="form-inline">
 	<div class="row" style="margin-top:3px;">
 		<div class="col-md-3 text-center">
 			Username:

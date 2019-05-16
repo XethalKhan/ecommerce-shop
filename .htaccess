@@ -8,3 +8,6 @@ RewriteRule   ^([a-z-]+)/([0-9]+)/?$   index.php?page=$1&id=$2   [L]
 
 #Rule 3: Because of link rewriting, relative addresses to assets will return 404 because of Rule 2, that is why we rewrite them as well
 RewriteRule   ^(.+)/assets/(.+)?$   assets/$2   [L]
+
+#Rule 4: Look for the article title
+RewriteRule   ^([a-z-]+)/([a-z-]+)$   api.php  [L]

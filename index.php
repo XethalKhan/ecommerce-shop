@@ -44,6 +44,9 @@
 			case "about":
 				require_once("views/pages/about.php");
 				break;
+			case "author":
+				require_once("views/pages/author.php");
+				break;
 			default:
 				require_once("views/pages/home.php");
 				break;

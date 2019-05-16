@@ -4,7 +4,7 @@
 			<li class="col-md-2"><a href="index.php?page=home">Home</a></li>
 			<li class="col-md-2"><a href="products.php">Products</a></li>
 			<li class="col-md-2"><a href="index.php?page=about">About</a></li>
-			<li class="col-md-2"><a href="author.php">Author</a></li>
+			<li class="col-md-2"><a href="index.php?page=author">Author</a></li>
 			<li class="col-md-2"><a href="">Docs</a></li>
 			<li class="col-md-2"><a href="survey.php">Survey</a></li>
 		</ul>

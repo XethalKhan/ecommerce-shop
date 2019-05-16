@@ -6,7 +6,7 @@
 			<li class="col-md-2"><a href="index.php?page=about">About</a></li>
 			<li class="col-md-2"><a href="index.php?page=author">Author</a></li>
 			<li class="col-md-2"><a href="">Docs</a></li>
-			<li class="col-md-2"><a href="survey.php">Survey</a></li>
+			<li class="col-md-2"><a href="index.php?page=survey">Survey</a></li>
 		</ul>
 	</div>
 </div>

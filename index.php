@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/css/footer.css">
 
     <link rel="stylesheet" href="assets/css/start.css">
+    <link rel="stylesheet" href="assets/css/form.css">
     <link rel="stylesheet" href="assets/css/search.css">
 	<!--/STYLESHEET-->
 	<!--FONT AWESOME 5 ICONS-->
@@ -50,6 +51,9 @@
 				break;
 			case "products":
 				require_once("views/pages/products.php");
+				break;
+			case "survey":
+				require_once("views/pages/survey.php");
 				break;
 			default:
 				require_once("views/pages/home.php");

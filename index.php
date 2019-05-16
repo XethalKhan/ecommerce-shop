@@ -56,6 +56,9 @@
 			case "products":
 				require_once("views/pages/products.php");
 				break;
+			case "sign-up":
+				require_once("views/pages/sign-up.php");
+				break;
 			case "survey":
 				require_once("views/pages/survey.php");
 				break;

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="assets/css/start.css">
     <link rel="stylesheet" href="assets/css/form.css">
     <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="css/admin.css">
 	<!--/STYLESHEET-->
 	<!--FONT AWESOME 5 ICONS-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -43,6 +44,9 @@
 		switch($page){
 			case "about":
 				require_once("views/pages/about.php");
+				break;
+			case "admin":
+				require_once("views/pages/admin.php");
 				break;
 			case "author":
 				require_once("views/pages/author.php");

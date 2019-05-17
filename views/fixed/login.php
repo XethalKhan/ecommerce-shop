@@ -25,8 +25,21 @@
 	</div>
 	<div class="row" style="margin-top:3px;">
 		<div class="col-md-12 text-center">	
-			<input type="submit" name="btnLogin" id="btnLogin" class="formBtn" value="Login"/>&nbsp;&nbsp;
-			<input type="button" name="btnSignUp" id="btnSignUp" class="formBtn" value="Sign-up" onclick="window.open('signup.php', '_self')" />
+			<input 
+				type="submit" 
+				name="btnLogin" 
+				id="btnLogin" 
+				class="formBtn" 
+				value="Login"
+			/>&nbsp;&nbsp;
+			<input 
+				type="button" 
+				name="btnSignUp" 
+				id="btnSignUp" 
+				class="formBtn" 
+				value="Sign-up" 
+				onclick=<?php echo "\"window.open('http://" . BASE_HREF . "/sign-up', '_self')\"" ;?>
+			/>
 		</div>
 	</div>
 </form>
@@ -49,7 +62,14 @@
 		</div>
 		<div class="col-md-4 text-center">
 			<?php if($_SESSION["gid"] == 1): ?>
-				<input type="button" name="btnAdmin" id="btnAdmin" class="formBtn" value="Admin panel" onclick="window.open('admin.php', '_self')" />
+				<input 
+					type="button" 
+					name="btnAdmin" 
+					id="btnAdmin" 
+					class="formBtn" 
+					value="Admin panel" 
+					onclick=<?php echo "\"window.open('http://" . BASE_HREF . "/admin', '_self')\"" ;?>
+				/>
 			<?php endif ?>
 		</div>
 		<div class="row col-sm-4 text-center">

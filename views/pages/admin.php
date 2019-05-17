@@ -1,3 +1,4 @@
+<?php if($_SESSION["gid"] == 1): ?>
 <div id="content">
 	<div class="row admin-row">
 		<a class="col-sm-6 text-center admin-cat" href="users.php">
@@ -63,3 +64,9 @@
 		</table>
 	</div>
 </div>
+<?php else: ?>
+	<?php 
+		$_SESSION["msg"] = "Insufficient privileges";
+		header("Location: http://" . BASE_HREF . "/login");
+	?>
+<?php endif;?>

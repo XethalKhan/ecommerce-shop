@@ -46,7 +46,7 @@
 <?php else: ?>
 	<div class="row" style="margin-top:3px;">
 		<div class="col-md-12 text-center">
-			<?php  echo "<a id=\"profile-name\" href=\"profile.php?uid=" . $_SESSION['uid'] . "\"><b>" . $_SESSION["user"] . "</b></a>"; ?>
+			<?php  echo "<a id=\"profile-name\" href=\"http://" . BASE_HREF . "/user/" . $_SESSION['uid'] . "\"><b>" . $_SESSION["user"] . "</b></a>"; ?>
 		</div>
 	</div>
 	<div class="row" style="margin-top:3px;">
@@ -80,10 +80,6 @@
 			    	<?php 
 			    		$prodids = array();
 			    		if(!(empty($_SESSION["order"]))){
-
-			    			require_once("utl/db.php");
-			    			$crm = new DB("id8082146_root", "faksc0ece");
-							$conn = $crm->getInstance();
 
 							foreach($_SESSION["order"] as $key=>$val){
 								$prodids[] = $key;

@@ -1,5 +1,11 @@
-<?php if(isset($_SESSION["uid"]) && !isset($_GET["id"]) && !empty($_SESSION["uid"])):?>
-	<?php header("Location: http://" . BASE_HREF . "/user/" . $_SESSION["uid"]);?>
+<?php if(isset($_SESSION["uid"]) && !isset($_GET["id"])):?>
+	<?php
+		if(empty($_SESSION["uid"])){
+			header("Location: http://" . BASE_HREF . "/login");
+		}else{
+			header("Location: http://" . BASE_HREF . "/user/" . $_SESSION["uid"]);
+		}
+	?>
 <?php elseif(!isset($_SESSION["uid"]) && !isset($_GET["id"])):?>
 	<?php header("Location: http://" . BASE_HREF . "/login");?>
 <?php else: ?>
@@ -183,7 +189,7 @@
 			</div>
 		<?php  endif; ?>
 	</div>
-	<div class="col-lg-4 text-center" id="aside">
+	<div class="col-lg-4 text-center" id="asideSearch">
 		<?php 
 			$query = "SELECT id, DATE(order_date) AS date FROM `order` WHERE c_id = :c_id AND status = 1";
 

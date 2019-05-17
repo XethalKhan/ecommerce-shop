@@ -66,6 +66,9 @@
 			case "survey":
 				require_once("views/pages/survey.php");
 				break;
+			case "user":
+				require_once("views/pages/user.php");
+				break;
 			default:
 				require_once("views/pages/home.php");
 				break;

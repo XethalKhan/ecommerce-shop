@@ -53,7 +53,7 @@
 					$rs=$stmt->fetchall();
 					foreach($rs as $cat){
 						$n = strlen($cat->name) > 25 ? substr($cat->name, 0, 25) . ". . ." : $cat->name;
-						echo "<li><a href=\"http://" . HREF. "/products/" . $cat->id . "\">" . $n ."</a></li>";
+						echo "<li><a href=\"http://" . BASE_HREF. "/products/" . $cat->id . "\">" . $n ."</a></li>";
 					}
 				?>
 				</ul>

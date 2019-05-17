@@ -38,7 +38,14 @@
 	</div>
 	<div class="row" style="margin-top:3px;">
 		<div class="col-md-4 text-center">
-			<input type="button" name="btnSignUp" id="btnSignUp" class="formBtn" value="Logout" onclick="window.open('utl/logout.php', '_self')" />
+			<input 
+				type="button" 
+				name="btnSignUp" 
+				id="btnSignUp" 
+				class="formBtn" 
+				value="Logout" 
+				onclick=<?php echo "\"window.open('http://" . BASE_HREF . "/user/logout', '_self')\"" ;?>
+			/>
 		</div>
 		<div class="col-md-4 text-center">
 			<?php if($_SESSION["gid"] == 1): ?>

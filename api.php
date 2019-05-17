@@ -18,6 +18,10 @@
 					require_once("models/user/login.php");
 					break;
 				}
+				case "logout":{
+					require_once("models/user/logout.php");
+					break;
+				}
 			}
 			break;
 		}

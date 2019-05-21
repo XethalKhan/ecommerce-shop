@@ -4,7 +4,7 @@
 		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/user-list";?>>
 			<h2>USERS</h2>
 		</a>
-		<a class="col-sm-6 text-center admin-cat" href="orders.php">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/order-list";?>>
 			<h2>ORDERS</h2>
 		</a>
 	</div>

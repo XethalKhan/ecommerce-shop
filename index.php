@@ -46,6 +46,9 @@
 			case "user":
 				require_once("views/pages/user.php");
 				break;
+			case "user-list":
+				require_once("views/pages/user-list.php");
+				break;
 			default:
 				require_once("views/pages/home.php");
 				break;

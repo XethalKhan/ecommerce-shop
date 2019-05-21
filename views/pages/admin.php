@@ -1,7 +1,7 @@
 <?php if($_SESSION["gid"] == 1): ?>
 <div id="content">
 	<div class="row admin-row">
-		<a class="col-sm-6 text-center admin-cat" href="users.php">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/user-list";?>>
 			<h2>USERS</h2>
 		</a>
 		<a class="col-sm-6 text-center admin-cat" href="orders.php">

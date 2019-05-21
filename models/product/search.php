@@ -1,10 +1,6 @@
 <?php 
 	session_start();
 
-	require_once("db.php");
-	$crm = new DB("root", "root");
-	$conn = $crm->getInstance();
-
 	$query = "SELECT id, name, unit_price, cat_id, img FROM product";
 
 	$name = $_POST["name"];

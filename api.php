@@ -8,8 +8,10 @@
 	$model = substr($req, 0, strrpos($req, '/'));
 	$model = substr($model, strrpos($model, '/') + 1);
 
+	/*
 	echo "<br/>" . $action;
 	echo "<br/>" . $model;
+	*/
 
 	switch($model){
 		case "user":{
@@ -20,6 +22,15 @@
 				}
 				case "logout":{
 					require_once("models/user/logout.php");
+					break;
+				}
+			}
+			break;
+		}
+		case "product":{
+			switch($action){
+				case "search":{
+					require_once("models/product/search.php");
 					break;
 				}
 			}

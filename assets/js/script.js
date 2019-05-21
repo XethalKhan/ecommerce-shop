@@ -309,32 +309,38 @@ $(document).ready(function(){
 		}
 	});
 
+	//<Searching products on product-list page>
 	$("#btnSearchProducts").click(function(){
-		var name = $("#tbName").val();
-		var maxPrice = $("#tbMaxPrice").val();
-		var minPrice = $("#tbMinPrice").val();
-		var cat = $("#ddlSearchCategory option:selected").val();
-		var discount = $("#cbxDiscount").prop("checked");
-		var stock = $("#cbxStock").prop("checked");
+		let name = $("#tbName").val(); 								//product name
+		let maxPrice = $("#tbMaxPrice").val();						//max product price
+		let minPrice = $("#tbMinPrice").val();						//min product price
+		let cat = $("#ddlSearchCategory option:selected").val();	//category ID
+		let discount = $("#cbxDiscount").prop("checked");			//product on discount
+		let stock = $("#cbxStock").prop("checked");					//product on stock
 
 
-		$(".err").text("");
-		$("#errList").text("");
+		$(".err").text("");											//clear errors for all specific inputs
+		$("#errList").text("");										//clear error list
 
+		//<checking if max product price is in decimal format if it is entered>
 		if(!(/(^[+|-]?\d*\.?\d*[0-9]+\d*$)|(^[+|-]?[0-9]+\d*\.\d*$)/.test(maxPrice)) && maxPrice != ""){
 			maxPrice = "";
 			$("#errList").append("Value for max price is not valid number!<br/>");
 			$("#maxPErr").text("*");
 		}
+		//</checking if max product price is in decimal format if it is entered>
 
+		//<checking if min product price is in decimal format if it is entered>
 		if(!(/(^[+|-]?\d*\.?\d*[0-9]+\d*$)|(^[+|-]?[0-9]+\d*\.\d*$)/.test(minPrice)) && minPrice != ""){
 			minPrice = "";
 			$("#errList").append("Value for min price is not valid number!<br/>");
 			$("#minPErr").text("*");
 		}
+		//</checking if min product price is in decimal format if it is entered>
 
+		//<AJAX call for product search>
 		$.ajax({
-			url: "127.0.0.1/utl/getProducts.php",
+			url: "http://" + BASE_HREF + "product/search",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -345,48 +351,72 @@ $(document).ready(function(){
 				discount: discount,
 				stock: stock
 			},
-			success: function(data, txt, xhr){
-				$("#main").html("");
-				var cnt = data.length;
-				var app = "";
+			//<on success display products we find>
+			success: function(data, txt, xhr){	
+				$("#main").html("");			//deleting all products
+				var cnt = data.length;			//number of found products
+				var app = "";					//html string to insert in #main after data is properly formed in html
 				for(var i = 0; i< cnt; i++){
+					//<begin new row of products>
 					if(i%3 == 0){
 						app = app + "<div class=\"row search-row\">";
 					}
+					//</begin new row of products>
+					//<append product>
 					app = app +
 						"<div class=\"search-prod col-sm-4\">" +
+							//<product image>
 							"<div class=\" text-center\">" +
-								"<img src=\"img/prod/" + data[i]["img"] + "\" width=\"auto\" height=\"150\"/>" +
+								"<img src=\"assets/images/" + data[i]["img"] + "\" width=\"auto\" height=\"150\"/>" +
 							"</div>" +
+							//</product image>
 							"<div class=\"row search-details\">" +
+								//<product name>
 								"<div class=\"col-sm-9 text-center\">" +
 									"<h6>" + data[i]["name"] + "</h6>" +		
 								"</div>" +
+								//</product name>
+								//<product price>
 								"<div class=\"col-sm-3 text-center\">" +
 									"<h6 class=\"search-price\">" +
 										"$" + parseFloat(Math.round(data[i]["unit_price"] * 100) / 100).toFixed(2) + 
 									"</h6>" +
 								"</div>" +
+								//</product price>
 							"</div>" +
 							"<div class=\"row text-center product-links\">" +
+								//<product details>
 								"<div class=\"col-sm-6\">" +
 									"<a href=\"prod.php?pid=" + data[i]["id"] + "\" class=\"search-detail\">Details</a>" +
 								"</div>" +
+								//</product details>
+								//<buy product>
 								"<div class=\"col-sm-6\">" +
 									"<a href=\"\" class=\"product-action\" data-pid=\"" +  data[i]["id"] +
 									 "\" data-cat=\"" +  data[i]["cat_id"] + "\">Purchase</a>" +
 								"</div>" +	
+								//</buy product>
 							"</div>" +
 						"</div>";
-					if(i % 3 == 2 || i + 1 == cnt){app = app + "</div>";}
+					//</append product>
+					//<end row of products for every 3rd product or for last product>
+					if(i % 3 == 2 || i + 1 == cnt){
+						app = app + "</div>";
+					}
+					//</end row of products for every 3rd product or for last product>
 				}
-				$("#main").html(app);
+				$("#main").html(app);		//append formed html string from products
 			},
+			//</on success display products we find>
+			//<on error alert>
 			error: function(xhr, status, error){
 				alert(xhr.status);	
 			}
+			//</on error alert>
 		});
+		//</AJAX call for product search>
 	});
+	//</Searching products on product-list page>
 
 	$("#btnSearchOrders").click(function(){
 		var customer = $("#tbCustomer").val();

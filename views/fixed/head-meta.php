@@ -36,6 +36,7 @@
             }
         ?>
     </title>
+    <script>var BASE_HREF = <?php echo "\"" . BASE_HREF . "/\"";?></script>
 	<meta charset="utf-8">
 	<!--STYLESHEET-->
     <link rel="stylesheet" href="assets/css/header.css">

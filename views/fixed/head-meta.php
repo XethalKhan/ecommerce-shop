@@ -18,6 +18,12 @@
                 case "login":
                     echo "Log in";
                     break;
+                case "order-list":
+                    echo "Admin panel - list of all orders";
+                    break;
+                case "order":
+                    echo "Order details";
+                    break;
                 case "product-list":
                     echo "Products";
                     break;
@@ -26,6 +32,9 @@
                     break;
                 case "survey":
                     echo "Survey";
+                    break;
+                case "user-list":
+                    echo "Admin panel - list of all users";
                     break;
                 case "user":
                     echo "User profile";

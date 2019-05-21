@@ -5,6 +5,7 @@
 
 	require_once("config/config.php");
 	require_once("config/connection.php");
+	require_once("config/logging.php");
 ?>
 <!DOCTYPE html>
 <html>

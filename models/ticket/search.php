@@ -1,10 +1,6 @@
 <?php 
 	session_start();
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
-		
-		require_once("db.php");
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
 
 		$query = "SELECT " .
 					"t.id AS id, " .

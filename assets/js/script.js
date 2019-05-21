@@ -354,9 +354,9 @@ $(document).ready(function(){
 			//<on success display products we find>
 			success: function(data, txt, xhr){	
 				$("#main").html("");			//deleting all products
-				var cnt = data.length;			//number of found products
-				var app = "";					//html string to insert in #main after data is properly formed in html
-				for(var i = 0; i< cnt; i++){
+				let cnt = data.length;			//number of found products
+				let app = "";					//html string to insert in #main after data is properly formed in html
+				for(let i = 0; i< cnt; i++){
 					//<begin new row of products>
 					if(i%3 == 0){
 						app = app + "<div class=\"row search-row\">";
@@ -420,13 +420,13 @@ $(document).ready(function(){
 
 	//<Searching orders on order-list page with AJAX>
 	$("#btnSearchOrders").click(function(){
-		var customer = $("#tbCustomer").val();		//customer name
-		var maxF = $("#tbMaxFreight").val();		//max order freight
-		var minF = $("#tbMinFreight").val();		//min order freight
-		var city = $("#tbCity").val();				//city to deliver
-		var country = $("#tbCountry").val();		//country to deliver
-		var address = $("#tbAddress").val();		//address to deliver
-		var orderDate = $("#tbOrderDate").val();	//date to deliver
+		let customer = $("#tbCustomer").val();		//customer name
+		let maxF = $("#tbMaxFreight").val();		//max order freight
+		let minF = $("#tbMinFreight").val();		//min order freight
+		let city = $("#tbCity").val();				//city to deliver
+		let country = $("#tbCountry").val();		//country to deliver
+		let address = $("#tbAddress").val();		//address to deliver
+		let orderDate = $("#tbOrderDate").val();	//date to deliver
 
 		$(".err").text("");							//clear errors for all specific inputs
 		$("#errList").text("");						//clear error list
@@ -472,8 +472,8 @@ $(document).ready(function(){
 			//<on success display orders we find>
 			success: function(data, txt, xhr){
 				$("#orderTable").find("tr:gt(0)").remove();						//remove all rows except header row
-				var cnt = data.length;											//number of orders found
-				for(var i = 0; i < cnt; i++){
+				let cnt = data.length;											//number of orders found
+				for(let i = 0; i < cnt; i++){
 				//<append order into order table>
 				$('#orderTable > tbody:last-child')
 					.append(
@@ -505,22 +505,26 @@ $(document).ready(function(){
 	});
 	//</Searching orders on order-list page with AJAX>
 
+	//<Searching tickets on ticket-list page with AJAX>
 	$("#btnSearchTickets").click(function(){
-		var id = $("#tbID").val();
-		var date = $("#tbTicketDate").val();
-		var customer = $("#tbCustomer").val();
+		let id = $("#tbID").val();					//ticket id
+		let date = $("#tbTicketDate").val();		//ticket creation date
+		let customer = $("#tbCustomer").val();		//user who created ticket
 
-		$(".err").text("");
-		$("#errList").text("");
+		$(".err").text("");							//clear errors for all specific inputs
+		$("#errList").text("");						//clear error list
 
+		//<checking if ticket creation date is in valid format if it is entered>
 		if(!(/(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.(19[0-9][0-9]|20[0-5][0-9])/.test(date)) && date != ""){
 			date = "";
 			$("#errList").append("Order date is not in valid format, must be written like dd.mm.yyyy from 1900 to 2050!<br/>");
 			$("#ticketDateErr").text("*");
 		}
+		//</checking if ticket creation date is in valid format if it is entered>
 
+		//<AJAX call for ticket search>
 		$.ajax({
-			url: "127.0.0.1/utl/getTickets.php",
+			url: "http://" + BASE_HREF + "ticket/search",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -528,34 +532,40 @@ $(document).ready(function(){
 				date: date,
 				customer: customer
 			},
+			//<on success display found tickets>
 			success: function(data, txt, xhr){
 				$("#ticketTable").find("tr:gt(0)").remove();
-				var cnt = data.length;
-				for(var i = 0; i < cnt; i++){
+				let cnt = data.length;
+				for(let i = 0; i < cnt; i++){
 				$('#ticketTable > tbody:last-child')
 					.append(
 						'<tr>' + 
-							'<td>' + data[i]["id"] + '</td>' + 
-							'<td>' + data[i]["username"] + '</td>' + 
-							'<td>' + data[i]["date"].substring(8, 10) + 
+							'<td>' + data[i]["id"] + '</td>' + 															//ticket id
+							'<td>' + data[i]["username"] + '</td>' + 													//username
+							'<td>' + data[i]["date"].substring(8, 10) + 												//ticket creation date
 								'.' + data[i]["date"].substring(5, 7) + 
 								'.' + data[i]["date"].substring(0, 4) + 
 							'</td>' +
-							'<td>' + data[i]["request"] + '</td>' +
+							'<td>' + data[i]["request"] + '</td>' +														//text
 							'<td>' + 
-								'<a href=\"#\ class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '>Solved</a>' +
-								'<a href=\"#\ class=\"dissmiss-ticket\" data-id=\"' + data[i]["id"] + '>Dissmiss</a>' +
+								'<a href=\"#\ class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '>Solved</a>' +		//solve ticket
+								'<a href=\"#\ class=\"dissmiss-ticket\" data-id=\"' + data[i]["id"] + '>Dismiss</a>' +	//dismiss ticket
 							 '</td>' + 
 						'</tr>');
 				}
 			},
+			//</on success display found tickets>
+			//<on status 404 == nothing found>
 			error: function(xhr, status, error){
 				if(xhr.status == 404){
 					$("#errList").append("Nothing found<br/>");
 				}
 			}
+			//</on status 404 == nothing found>
 		});
+		//</AJAX call for ticket search>
 	});
+	//</Searching tickets on ticket-list page with AJAX>
 
 	$("#ticketTable").on("click", ".solve-ticket", function(e){
 		var tid = $(this).data("id");
@@ -779,11 +789,11 @@ $(document).ready(function(){
 
 	//<Searching users on user-list page with AJAX>
 	$("#btnSearchUsers").click(function(){
-		var user = $("#tbCustomer").val();						//username
-		var fn = $("#tbFn").val();								//users first name
-		var ln = $("#tbLn").val();								//users last name
-		var mail = $("#tbMail").val();							//users e-mail
-		var status = $("#ddlStatus option:selected").val();		//users status
+		let user = $("#tbCustomer").val();						//username
+		let fn = $("#tbFn").val();								//users first name
+		let ln = $("#tbLn").val();								//users last name
+		let mail = $("#tbMail").val();							//users e-mail
+		let status = $("#ddlStatus option:selected").val();		//users status
 
 		//<AJAX call for user search>
 		$.ajax({
@@ -801,9 +811,9 @@ $(document).ready(function(){
 				success: function(data, txt, xhr){
 					if(xhr.status == 200){
 						$("#userTable").find("tr:gt(0)").remove();			//remove all table rows but first
-						var cnt = data.length;								//number of users found
-						for(var i = 0; i < cnt; i++){
-							var status = "";								//user status
+						let cnt = data.length;								//number of users found
+						for(let i = 0; i < cnt; i++){
+							let status = "";								//user status
 							//<user status in text>
 							switch(data[i]["status"]){
 								case "0":

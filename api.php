@@ -32,6 +32,15 @@
 			}
 			break;
 		}
+		case "ticket":{
+			switch($action){
+				case "search":{
+					require_once("models/ticket/search.php");
+					break;
+				}
+			}
+			break;
+		}
 		case "user":{
 			switch($action){
 				case "login":{

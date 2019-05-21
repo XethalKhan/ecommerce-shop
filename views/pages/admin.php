@@ -9,7 +9,7 @@
 		</a>
 	</div>
 	<div class="row admin-row">
-		<a class="col-sm-6 text-center admin-cat" href="tickets.php">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/ticket-list";?>>
 			<h2>TICKETS</h2>
 		</a>
 		<a class="col-sm-6 text-center admin-cat" href="surveyResult.php">

@@ -49,6 +49,9 @@
 			case "survey":
 				require_once("views/pages/survey.php");
 				break;
+			case "ticket-list":
+				require_once("views/pages/ticket-list.php");
+				break;
 			case "user":
 				require_once("views/pages/user.php");
 				break;

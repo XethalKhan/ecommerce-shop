@@ -33,6 +33,9 @@
                 case "survey":
                     echo "Survey";
                     break;
+                case "ticket-list":
+                    echo "Admin panel - list of all tickets";
+                    break;
                 case "user-list":
                     echo "Admin panel - list of all users";
                     break;

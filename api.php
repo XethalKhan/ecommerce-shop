@@ -14,6 +14,24 @@
 	*/
 
 	switch($model){
+		case "order":{
+			switch($action){
+				case "search":{
+					require_once("models/order/search.php");
+					break;
+				}
+			}
+			break;
+		}
+		case "product":{
+			switch($action){
+				case "search":{
+					require_once("models/product/search.php");
+					break;
+				}
+			}
+			break;
+		}
 		case "user":{
 			switch($action){
 				case "login":{
@@ -26,15 +44,6 @@
 				}
 				case "search":{
 					require_once("models/user/search.php");
-					break;
-				}
-			}
-			break;
-		}
-		case "product":{
-			switch($action){
-				case "search":{
-					require_once("models/product/search.php");
 					break;
 				}
 			}

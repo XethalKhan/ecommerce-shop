@@ -418,38 +418,46 @@ $(document).ready(function(){
 	});
 	//</Searching products on product-list page with AJAX>
 
+	//<Searching orders on order-list page with AJAX>
 	$("#btnSearchOrders").click(function(){
-		var customer = $("#tbCustomer").val();
-		var maxF = $("#tbMaxFreight").val();
-		var minF = $("#tbMinFreight").val();
-		var city = $("#tbCity").val();
-		var country = $("#tbCountry").val();
-		var address = $("#tbAddress").val();
-		var orderDate = $("#tbOrderDate").val();
+		var customer = $("#tbCustomer").val();		//customer name
+		var maxF = $("#tbMaxFreight").val();		//max order freight
+		var minF = $("#tbMinFreight").val();		//min order freight
+		var city = $("#tbCity").val();				//city to deliver
+		var country = $("#tbCountry").val();		//country to deliver
+		var address = $("#tbAddress").val();		//address to deliver
+		var orderDate = $("#tbOrderDate").val();	//date to deliver
 
-		$(".err").text("");
-		$("#errList").text("");
+		$(".err").text("");							//clear errors for all specific inputs
+		$("#errList").text("");						//clear error list
 
+		//<checking if max freight is in decimal format if it is entered>
 		if(!(/(^[+|-]?\d*\.?\d*[0-9]+\d*$)|(^[+|-]?[0-9]+\d*\.\d*$)/.test(maxF)) && maxF != ""){
 			maxF = "";
 			$("#errList").append("Value for max freight is not valid number!<br/>");
 			$("#maxfErr").text("*");
 		}
+		//</checking if max freight is in decimal format if it is entered>
 
+		//<checking if min freight is in decimal format if it is entered>
 		if(!(/(^[+|-]?\d*\.?\d*[0-9]+\d*$)|(^[+|-]?[0-9]+\d*\.\d*$)/.test(minF)) && minF != ""){
 			minF = "";
 			$("#errList").append("Value for min freight is not valid number!<br/>");
 			$("#minfErr").text("*");
 		}
+		//</checking if min freight is in decimal format if it is entered>
 
+		//<checking if order date is in valid format if it is entered>
 		if(!(/(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.(19[0-9][0-9]|20[0-5][0-9])/.test(orderDate)) && orderDate != ""){
 			orderDate = "";
 			$("#errList").append("Order date is not in valid format, must be written like dd.mm.yyyy from 1900 to 2050!<br/>");
 			$("#orderDateErr").text("*");
 		}
+		//</checking if order date is in valid format if it is entered>
 
+		//<AJAX call for order search>
 		$.ajax({
-			url: "127.0.0.1/utl/getOrders.php",
+			url: "http://" + BASE_HREF + "order/search",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -461,30 +469,41 @@ $(document).ready(function(){
 				address: address,
 				orderDate: orderDate
 			},
+			//<on success display orders we find>
 			success: function(data, txt, xhr){
-				$("#orderTable").find("tr:gt(0)").remove();
-				var cnt = data.length;
+				$("#orderTable").find("tr:gt(0)").remove();						//remove all rows except header row
+				var cnt = data.length;											//number of orders found
 				for(var i = 0; i < cnt; i++){
+				//<append order into order table>
 				$('#orderTable > tbody:last-child')
 					.append(
 						'<tr>' + 
-							'<td>' + data[i]["id"] + '</td>' + 
-							'<td>' + data[i]["username"] + '</td>' + 
-							'<td>' + data[i]["order_date"].substring(8, 10) + 
+							'<td>' + data[i]["id"] + '</td>' + 													//order id
+							'<td>' + data[i]["username"] + '</td>' + 											//customer name
+							'<td>' + data[i]["order_date"].substring(8, 10) + 									//order date
 								'.' + data[i]["order_date"].substring(5, 7) + 
 								'.' + data[i]["order_date"].substring(0, 4) + 
 							'</td>' +
-							'<td>' + data[i]["freight"] + '</td>' +
-							'<td>' + data[i]["address"] + '</td>' + 
-							'<td>' + data[i]["city"] + '</td>' +
+							'<td>' + data[i]["freight"] + '</td>' +												//order freight
+							'<td>' + data[i]["address"] + '</td>' + 											//address to deliver
+							'<td>' + data[i]["city"] + '</td>' +												//country to deliver
+							'<td>' + 
+								'<a href=\"http://' + BASE_HREF + 'order/' + data[i]["id"] + '\">Details</a>' +	//order details page
+							'</td>' +
 						'</tr>');
+				//</append order into order table>
 				}
 			},
+			//</on success display orders we find>
+			//<on error alert>
 			error: function(xhr, status, error){
 				alert(xhr.status);	
 			}
+			//</on error alert>
 		});
+		//</AJAX call for order search>
 	});
+	//</Searching orders on order-list page with AJAX>
 
 	$("#btnSearchTickets").click(function(){
 		var id = $("#tbID").val();

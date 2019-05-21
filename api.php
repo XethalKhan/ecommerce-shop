@@ -24,6 +24,10 @@
 					require_once("models/user/logout.php");
 					break;
 				}
+				case "search":{
+					require_once("models/user/search.php");
+					break;
+				}
 			}
 			break;
 		}

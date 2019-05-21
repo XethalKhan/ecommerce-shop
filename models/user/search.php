@@ -2,10 +2,6 @@
 	session_start();
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
 
-		require_once("db.php");
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
-
 		$query = "SELECT id, username, firstname, lastname, email, status FROM user";
 
 		$username = $_POST["user"];

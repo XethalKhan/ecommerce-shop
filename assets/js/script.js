@@ -309,7 +309,7 @@ $(document).ready(function(){
 		}
 	});
 
-	//<Searching products on product-list page>
+	//<Searching products on product-list page with AJAX>
 	$("#btnSearchProducts").click(function(){
 		let name = $("#tbName").val(); 								//product name
 		let maxPrice = $("#tbMaxPrice").val();						//max product price
@@ -416,7 +416,7 @@ $(document).ready(function(){
 		});
 		//</AJAX call for product search>
 	});
-	//</Searching products on product-list page>
+	//</Searching products on product-list page with AJAX>
 
 	$("#btnSearchOrders").click(function(){
 		var customer = $("#tbCustomer").val();
@@ -758,15 +758,17 @@ $(document).ready(function(){
 			});
 	});
 
+	//<Searching users on user-list page with AJAX>
 	$("#btnSearchUsers").click(function(){
-		var user = $("#tbCustomer").val();
-		var fn = $("#tbFn").val();
-		var ln = $("#tbLn").val();
-		var mail = $("#tbMail").val();
-		var status = $("#ddlStatus option:selected").val();
+		var user = $("#tbCustomer").val();						//username
+		var fn = $("#tbFn").val();								//users first name
+		var ln = $("#tbLn").val();								//users last name
+		var mail = $("#tbMail").val();							//users e-mail
+		var status = $("#ddlStatus option:selected").val();		//users status
 
+		//<AJAX call for user search>
 		$.ajax({
-				url: "127.0.0.1/utl/getUsers.php",
+				url: "http://" + BASE_HREF + "user/search",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -776,12 +778,14 @@ $(document).ready(function(){
 					mail: mail,
 					status: status
 				},
+				//<status 200 = there are users found>
 				success: function(data, txt, xhr){
 					if(xhr.status == 200){
-						$("#userTable").find("tr:gt(0)").remove();
-						var cnt = data.length;
+						$("#userTable").find("tr:gt(0)").remove();			//remove all table rows but first
+						var cnt = data.length;								//number of users found
 						for(var i = 0; i < cnt; i++){
-							var status = "";
+							var status = "";								//user status
+							//<user status in text>
 							switch(data[i]["status"]){
 								case "0":
 									status = "Active";
@@ -795,28 +799,35 @@ $(document).ready(function(){
 								default:
 									status = "N/A";
 							}
-						$('#userTable > tbody:last-child')
-							.append(
-								'<tr>' + 
-									'<td class=\"cat-name\">' + data[i]["username"] + '</td>' + 
-									'<td class=\"cat-desc\">' + data[i]["firstname"] + '</td>' + 
-									'<td class=\"cat-desc\">' + data[i]["lastname"] + '</td>' +
-									'<td class=\"cat-desc\">' + data[i]["email"] + '</td>' +
-									'<td class=\"cat-desc\">' + status + '</td>' +
-									'<td>' + 
-										'<a href=\"profile.php?uid=' + data[i]["id"] + '\">Profile</a>' +
-									 '</td>' + 
-								'</tr>');
+							//</user status in text>
+							//<append user to table of users>
+							$('#userTable > tbody:last-child')
+								.append(
+									'<tr>' + 
+										'<td class=\"cat-name\">' + data[i]["username"] + '</td>' + 						//display username
+										'<td class=\"cat-desc\">' + data[i]["firstname"] + '</td>' + 						//display user first name
+										'<td class=\"cat-desc\">' + data[i]["lastname"] + '</td>' +							//display user last name
+										'<td class=\"cat-desc\">' + data[i]["email"] + '</td>' +							//display user e-mail
+										'<td class=\"cat-desc\">' + status + '</td>' +										//display user status
+										'<td>' + 
+											'<a href=\"http://' + BASE_HREF + 'user/' + data[i]["id"] + '\">Profile</a>' +	//link to user profile
+										 '</td>' + 
+									'</tr>');
+							//</append user to table of users>
 						}
 					}
 				},
+				//</status 200 = there are users found>
+				//<status 404 = there are no users found>
 				error: function(xhr, status, error){
 					if(xhr.status == 404){
 						$("#userTable").find("tr:gt(0)").remove();
 					}
 				}
+				//</status 404 = there are no users found>
 			});
 	});
+	//</Searching users on user-list page with AJAX>
 
 	function checkProdUpload(){
 		var name = $("#tbName").val();

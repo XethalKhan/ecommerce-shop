@@ -118,7 +118,7 @@
 								"<td>" . $user->lastname . "</td>" .
 								"<td>" . $user->email . "</td>" .
 								"<td>" . $stat . "</td>" .
-								"<td>" . "<a href=\"profile.php?uid=" . $user->id . "\">Profile</a>" . "</td>" .
+								"<td>" . "<a href=\"http://" . BASE_HREF . "/user/" . $user->id . "\">Profile</a>" . "</td>" .
 							"</tr>";
 					}
 				?>

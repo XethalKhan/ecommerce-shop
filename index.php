@@ -34,6 +34,9 @@
 			case "login":
 				require_once("views/pages/login.php");
 				break;
+			case "order":
+				require_once("views/pages/order.php");
+				break;
 			case "product-list":
 				require_once("views/pages/product-list.php");
 				break;

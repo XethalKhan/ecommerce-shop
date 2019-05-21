@@ -200,7 +200,7 @@
 			$rs=$stmt->fetchall();
 			echo "<ul><li><h3>Orders pending</h3></li>";
 			foreach($rs as $order){
-				echo "<li><a href=\"order.php?oid=" . $order->id . "\">" . 
+				echo "<li><a href=\"http://" . BASE_HREF . "/order/" . $order->id . "\">" . 
 						"Order #" . $order->id .  
 						" Ordered:" . date("d.m.Y", strtotime($order->date)) . 
 					"</a></li>";

@@ -19,6 +19,10 @@
 				$_SESSION['gid'] = $rs->grp;
 				$_SESSION['user'] = $rs->username;
 				$_SESSION['order'] = array();
+				$session_id = md5(time() + $_SESSION['uid'] + $_SESSION['gid']);
+				setcookie("session-id", $session_id);
+				$stmt = $conn->prepare("INSERT INTO session(hash, uid, gid) VALUES(?, ?, ?)");
+				$stmt->execute([$session_id, $_SESSION['uid'], $_SESSION['gid']]);
 				header("Location: http://" . BASE_HREF . "/home");
 				exit;
 			}else{

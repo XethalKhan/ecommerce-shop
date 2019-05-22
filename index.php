@@ -11,6 +11,7 @@
 <html>
 <?php 
 	require_once("views/fixed/head-meta.php");
+	require_once("config/session.php");
 ?>
 <body class="container-fluid">
 	<?php 

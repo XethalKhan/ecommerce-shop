@@ -1,18 +1,18 @@
 <?php if($_SESSION["gid"] == 1): ?>
 <div id="content">
 	<div class="row admin-row">
-		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/user-list";?>>
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/user-list\"";?>>
 			<h2>USERS</h2>
 		</a>
-		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/order-list";?>>
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/order-list\"";?>>
 			<h2>ORDERS</h2>
 		</a>
 	</div>
 	<div class="row admin-row">
-		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/ticket-list";?>>
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/ticket-list\"";?>>
 			<h2>TICKETS</h2>
 		</a>
-		<a class="col-sm-6 text-center admin-cat" href="surveyResult.php">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/survey-result\"";?>>
 			<h2>SURVEY</h2>
 		</a>
 	</div>

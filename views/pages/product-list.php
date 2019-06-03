@@ -125,7 +125,7 @@
 							"</div>" .
 							"<div class=\"row text-center product-links\">" .
 								"<div class=\"col-sm-6\">" .
-									"<a href=\"prod.php?pid=" . $prod->id . "\" class=\"product-detail\">Details</a>" .
+									"<a href=\"http://" . BASE_HREF . "/product/" . $prod->id . "\" class=\"product-detail\">Details</a>" .
 								"</div>" .
 								"<div class=\"col-sm-6\">" .
 									"<a href=\"\" class=\"product-action\" data-pid=\"" . $prod->id . "\" 

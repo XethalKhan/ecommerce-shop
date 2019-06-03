@@ -48,6 +48,9 @@
 			case "order-list":
 				require_once("views/pages/order-list.php");
 				break;
+			case "product":
+				require_once("views/pages/product.php");
+				break;
 			case "product-list":
 				require_once("views/pages/product-list.php");
 				break;

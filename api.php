@@ -34,6 +34,10 @@
 		}
 		case "product":{
 			switch($action){
+				case "insert":{
+					require_once("models/product/insert.php");
+					break;
+				}
 				case "search":{
 					require_once("models/product/search.php");
 					break;

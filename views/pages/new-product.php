@@ -1,4 +1,4 @@
-<form id="formUploadProd" method="post" enctype="multipart/form-data" action="newProd.php">
+<form id="formUploadProd" method="post" enctype="multipart/form-data" action=<?php echo "\"http://" . BASE_HREF . "/product/insert\"";?>>
 	<div class="row formRow">
 		<div class="col-md-12 text-center">
 			<img src = "assets/img/logo.png" width="150px" height="150px"/>
@@ -90,7 +90,10 @@
 		<div class="col-md-12 text-center">
 			<p id="errList">
 				<?php 
-					echo $status;
+					if(isset($_SESSION["msg"])){
+						echo $_SESSION["msg"];
+						unset($_SESSION["msg"]);
+					}
 				?>
 			</p>
 		</div>

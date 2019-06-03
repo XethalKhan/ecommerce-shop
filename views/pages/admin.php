@@ -20,7 +20,7 @@
 		<a class="col-sm-6 text-center admin-cat" href="newProd.php">
 			<h2>NEW PRODUCT</h2>
 		</a>
-		<a class="col-sm-6 text-center admin-cat" href="categories.php">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/categories";?>>
 			<h2>CATEGORIES</h2>
 		</a>
 	</div>

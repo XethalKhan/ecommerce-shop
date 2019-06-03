@@ -30,6 +30,9 @@
 			case "author":
 				require_once("views/pages/author.php");
 				break;
+			case "categories":
+				require_once("views/pages/categories.php");
+				break;
 			case "home":
 				require_once("views/pages/home.php");
 				break;

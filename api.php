@@ -68,6 +68,10 @@
 		}
 		case "ticket":{
 			switch($action){
+				case "dismiss":{
+					require_once("models/ticket/dismiss.php");
+					break;
+				}
 				case "search":{
 					require_once("models/ticket/search.php");
 					break;

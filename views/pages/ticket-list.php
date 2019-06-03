@@ -79,7 +79,7 @@
 							"<td>" . $ticket->request. "</td>" .
 							"<td>" .
 								"<a href=\"#\" class=\"solve-ticket\" data-id=\"" . $ticket->id . "\">Solved</a><br/>" . 
-								"<a href=\"#\" class=\"dissmiss-ticket\" data-id=\"" . $ticket->id . "\">Dissmiss</a>" .
+								"<a href=\"#\" class=\"dismiss-ticket\" data-id=\"" . $ticket->id . "\">Dismiss</a>" .
 							"</td>" . 
 						"</tr>";
 				}

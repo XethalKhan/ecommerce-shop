@@ -3,10 +3,6 @@
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
 		$id = $_POST["id"];
 
-		require_once("db.php");
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
-
 		$query = "UPDATE `ticket` SET status = 1 WHERE id = :id";
 
 		$stmt = $conn->prepare($query);

@@ -11,7 +11,7 @@
 			$test = false;
 		}
 
-		if($current_time > $last_time){
+		if($last_time < $current_time){
 			$test = false;
 		}
 
@@ -22,7 +22,7 @@
 			setcookie("session-id", null, -1, SUBFOLDER . "/");
 			session_unset();
 			$_SESSION["msg"] = "Your session has expired, please log in";
-			//header("Location: http://" . BASE_HREF . "/login");
+			header("Location: http://" . BASE_HREF . "/login");
 		}else{
 			$t = time() + 600;
 			$stmt = $conn->prepare("UPDATE session SET access = ? WHERE hash = ? AND uid = ?");

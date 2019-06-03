@@ -549,7 +549,7 @@ $(document).ready(function(){
 							'<td>' + data[i]["request"] + '</td>' +														//text
 							'<td>' + 
 								'<a href=\"#\ class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '>Solved</a>' +		//solve ticket
-								'<a href=\"#\ class=\"dissmiss-ticket\" data-id=\"' + data[i]["id"] + '>Dismiss</a>' +	//dismiss ticket
+								'<a href=\"#\ class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '>Dismiss</a>' +	//dismiss ticket
 							 '</td>' + 
 						'</tr>');
 				}
@@ -568,7 +568,7 @@ $(document).ready(function(){
 	//</Searching tickets on ticket-list page with AJAX>
 
 	$("#ticketTable").on("click", ".solve-ticket", function(e){
-		var tid = $(this).data("id");
+		let tid = $(this).data("id");
 		$.ajax({
 			url: "127.0.0.1/utl/solveTicket.php",
 			type: "post",
@@ -579,12 +579,12 @@ $(document).ready(function(){
 			success: function(data, txt, xhr){
 				if(xhr.status == 200){
 
-					var id = $("#tbID").val();
-					var date = $("#tbTicketDate").val();
-					var customer = $("#tbCustomer").val();
+					let id = $("#tbID").val();
+					let date = $("#tbTicketDate").val();
+					let customer = $("#tbCustomer").val();
 
 					$.ajax({
-						url: "127.0.0.1/utl/getTickets.php",
+						url: "http://" + BASE_HREF + "ticket/search",
 						type: "post",
 						dataType: "json",
 						data: {
@@ -594,8 +594,8 @@ $(document).ready(function(){
 						},
 						success: function(data, txt, xhr){
 							$("#ticketTable").find("tr:gt(0)").remove();
-							var cnt = data.length;
-							for(var i = 0; i < cnt; i++){
+							let cnt = data.length;
+							for(let i = 0; i < cnt; i++){
 							$('#ticketTable > tbody:last-child')
 								.append(
 									'<tr>' + 
@@ -608,7 +608,7 @@ $(document).ready(function(){
 										'<td>' + data[i]["request"] + '</td>' +
 										'<td>' + 
 											'<a href=\"#\" class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '\">Solved</a><br/>' +
-											'<a href=\"#\" class=\"dissmiss-ticket\" data-id=\"' + data[i]["id"] + '\">Dissmiss</a>' +
+											'<a href=\"#\" class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '\">Dismiss</a>' +
 										 '</td>' + 
 									'</tr>');
 							}
@@ -627,9 +627,9 @@ $(document).ready(function(){
 	});
 
 	$("#ticketTable").on("click", ".dismiss-ticket", function(e){
-		var tid = $(this).data("id");
+		let tid = $(this).data("id");
 		$.ajax({
-			url: "127.0.0.1/utl/dissmissTicket.php",
+			url: "http://" + BASE_HREF + "/ticket/dismiss",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -638,12 +638,12 @@ $(document).ready(function(){
 			success: function(data, txt, xhr){
 				if(xhr.status == 200){
 
-					var id = $("#tbID").val();
-					var date = $("#tbTicketDate").val();
-					var customer = $("#tbCustomer").val();
+					let id = $("#tbID").val();
+					let date = $("#tbTicketDate").val();
+					let customer = $("#tbCustomer").val();
 
 					$.ajax({
-						url: "127.0.0.1/utl/getTickets.php",
+						url: "http://" + BASE_HREF + "ticket/search",
 						type: "post",
 						dataType: "json",
 						data: {
@@ -653,8 +653,8 @@ $(document).ready(function(){
 						},
 						success: function(data, txt, xhr){
 							$("#ticketTable").find("tr:gt(0)").remove();
-							var cnt = data.length;
-							for(var i = 0; i < cnt; i++){
+							let cnt = data.length;
+							for(let i = 0; i < cnt; i++){
 							$('#ticketTable > tbody:last-child')
 								.append(
 									'<tr>' + 
@@ -667,7 +667,7 @@ $(document).ready(function(){
 										'<td>' + data[i]["request"] + '</td>' +
 										'<td>' + 
 											'<a href=\"#\ class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '>Solved</a>' +
-											'<a href=\"#\ class=\"dissmiss-ticket\" data-id=\"' + data[i]["id"] + '>Dissmiss</a>' +
+											'<a href=\"#\ class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '>Dismiss</a>' +
 										 '</td>' + 
 									'</tr>');
 							}

@@ -25,6 +25,10 @@
 		}
 		case "order":{
 			switch($action){
+				case "add":{
+					require_once("models/order/add.php");
+					break;
+				}
 				case "search":{
 					require_once("models/order/search.php");
 					break;

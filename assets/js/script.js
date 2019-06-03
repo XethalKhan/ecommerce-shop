@@ -984,7 +984,7 @@ $(document).ready(function(){
 		number = int => overwrite
 		*/
 		$.ajax({
-			url: "127.0.0.1/utl/addToOrder.php",
+			url: "http://" + BASE_HREF + "/order/add",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -995,9 +995,9 @@ $(document).ready(function(){
 			success: function(data, txt, xhr){
 				if(xhr.status == 200){
 					$(".dropdown-menu").html("");
-					var cnt = data.length;
-					var items = "";
-					for(var i = 0; i < cnt; i++){
+					let cnt = data.length;
+					let items = "";
+					for(let i = 0; i < cnt; i++){
 						items = items + '<li>' + 
 								'&nbsp;&nbsp;&nbsp;' + 
 								'<i class=\"fa fa-plus plus-prod-add\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +

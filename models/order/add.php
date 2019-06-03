@@ -1,8 +1,5 @@
 <?php 
 	session_start();
-	require_once("db.php");
-	$crm = new DB("root", "root");
-	$conn = $crm->getInstance();
 	if(isset($_POST["pid"])){
 		if(isset($_SESSION["uid"])){
 			$pid = $_POST["pid"];

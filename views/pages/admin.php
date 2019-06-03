@@ -17,10 +17,10 @@
 		</a>
 	</div>
 	<div class="row admin-row">
-		<a class="col-sm-6 text-center admin-cat" href="newProd.php">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/new-product\"";?>>
 			<h2>NEW PRODUCT</h2>
 		</a>
-		<a class="col-sm-6 text-center admin-cat" href=<?php echo "http://" . BASE_HREF . "/categories";?>>
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/categories\"";?>>
 			<h2>CATEGORIES</h2>
 		</a>
 	</div>

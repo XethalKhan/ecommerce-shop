@@ -50,17 +50,6 @@
     </title>
     <script>var BASE_HREF = <?php echo "\"" . BASE_HREF . "/\"";?></script>
 	<meta charset="utf-8">
-	<!--STYLESHEET-->
-    <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/form.css">
-    <link rel="stylesheet" href="assets/css/nav.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-
-    <link rel="stylesheet" href="assets/css/start.css">
-    <link rel="stylesheet" href="assets/css/form.css">
-    <link rel="stylesheet" href="assets/css/search.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
-	<!--/STYLESHEET-->
 	<!--FONT AWESOME 5 ICONS-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<!--/FONT AWESOME 5 ICONS-->
@@ -71,5 +60,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <!--/BOOTSTRAP-->
+    <!--JAVASCRIPT-->
     <script src="assets/js/script.js"></script>
+    <!--JAVASCRIPT-->
+    <!--STYLESHEET-->
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <link rel="stylesheet" href="assets/css/start.css">
+    <link rel="stylesheet" href="assets/css/form.css">
+    <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <!--/STYLESHEET-->
 </head>

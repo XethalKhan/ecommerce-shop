@@ -1,9 +1,11 @@
 <?php
-	$file = fopen(BASE_FILE . "/data/log.txt", "a");
+	if(LOG=='on'){
+		$file = fopen(BASE_FILE . "/data/log.txt", "a");
 
-	$string = substr($_SERVER['REDIRECT_URL'], strlen(SUBFOLDER)) . "\t" . date("d.m.Y H:i:s") . "\t" . $_SERVER['REMOTE_ADDR'] . "\n";
+		$string = substr($_SERVER['REDIRECT_URL'], strlen(SUBFOLDER)) . "\t" . date("d.m.Y H:i:s") . "\t" . $_SERVER['REMOTE_ADDR'] . "\n";
 
-	fwrite($file, $string);
+		fwrite($file, $string);
 
-	fclose($file);
+		fclose($file);
+	}
 ?>

@@ -32,6 +32,15 @@
 			}
 			break;
 		}
+		case "survey":{
+			switch($action){
+				case "answer":{
+					require_once("models/survey/answer.php");
+					break;
+				}
+			}
+			break;
+		}
 		case "ticket":{
 			switch($action){
 				case "search":{

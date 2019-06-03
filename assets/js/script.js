@@ -164,7 +164,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "127.0.0.1/utl/survey.php",
+				url: "http://" + BASE_HREF + "survey/answer",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -180,12 +180,12 @@ $(document).ready(function(){
 				success: function(data, txt, xhr){
 					if(xhr.status == 200){
 						alert("Thank you for your time");
-						window.open("index.php", "_self");
+						window.open("http://" + BASE_HREF + "home", "_self");
 					}
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 401){
-						window.open("login.php", "_self");
+						window.open("http://" + BASE_HREF + "login", "_self");
 					}
 				}
 			})

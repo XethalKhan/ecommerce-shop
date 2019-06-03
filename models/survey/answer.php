@@ -2,8 +2,6 @@
 	session_start();
 	header("Content-type: application/json");
 	if(isset($_POST["status"]) && isset($_SESSION["uid"])){
-		require_once("db.php");
-
 		$gender = trim($_POST["gender"]);
 		$learnVal = trim($_POST["learnVal"]);
 		$learnTxt = trim($_POST["learnTxt"]);
@@ -14,9 +12,6 @@
 
 		$errArr = array();
 		$status = true;
-
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
 
 		if(empty($gender)){
 			$status = false;
@@ -59,7 +54,7 @@
 
 			foreach($products as $p){
 				$stmt = $conn->prepare(
-					"INSERT INTO survey_cbx(c_id, val) ".
+					"INSERT INTO survey_cbx(id, val) ".
 					"VALUES(:c_id, :val)");
 				$stmt->bindParam(":c_id", $idc);
 				$stmt->bindParam(":val", $p);
@@ -76,5 +71,6 @@
 	}else{
 		http_response_code(401);
 		echo json_encode("Login first");
+		$_SESSION["msg"] = "You must be logged in to complete our survey!";
 	}
 ?>

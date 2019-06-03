@@ -14,6 +14,15 @@
 	*/
 
 	switch($model){
+		case "category":{
+			switch($action){
+				case "search":{
+					require_once("models/category/search.php");
+					break;
+				}
+			}
+			break;
+		}
 		case "order":{
 			switch($action){
 				case "search":{

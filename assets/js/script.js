@@ -753,14 +753,18 @@ $(document).ready(function(){
 	});
 
 	$("#btnSearchCategory").click(function(){
-		var name = $("#tbName").val();
+		let name = $("#tbName").val();
+		name = name.toLowerCase();
+		let desc = $("#txtDesc").val();
+		desc = desc.toLowerCase();
 
 		$.ajax({
-				url: "127.0.0.1/utl/getCat.php",
+				url: "http://" + BASE_HREF + "category/search",
 				type: "post",
 				dataType: "json",
 				data: {
-					name: name
+					name: name,
+					desc: desc
 				},
 				success: function(data, txt, xhr){
 					if(xhr.status == 200){

@@ -137,7 +137,7 @@
 			<div class="row profileRow">
 				<div class="col-sm-6 text-center">
 					<input type="button" class="formBtn" value="Disable account" onclick="window.open(
-						<?php echo "'utl/disableAcc.php?uid=" . $_GET["id"]. "'";?>, '_self')" />
+						<?php echo "'http://" . BASE_HREF . "/user/disable/" . $_GET["id"]. "'";?>, '_self')" />
 				</div>
 				<div class="col-sm-6 text-center">
 					In order to disable account, all orders must be fullfilled<br/>

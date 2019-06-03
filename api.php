@@ -5,13 +5,17 @@
 	require_once("config/connection.php");
 
 	$action = substr($req, strrpos($req, '/') + 1);
-	$model = substr($req, 0, strrpos($req, '/'));
-	$model = substr($model, strrpos($model, '/') + 1);
 
-	/*
-	echo "<br/>" . $action;
-	echo "<br/>" . $model;
-	*/
+	if(preg_match("/^[0-9]+$/", $action)){
+		$action = substr($req, 0, strrpos($req, '/'));
+		$action = substr($action, strrpos($action, '/') + 1);
+		$model = substr($req, 0, strrpos($req, '/'));
+		$model = substr($req, 0, strrpos($model, '/'));
+		$model = substr($model, strrpos($model, '/') + 1);
+	}else{
+		$model = substr($req, 0, strrpos($req, '/'));
+		$model = substr($model, strrpos($model, '/') + 1);
+	}
 
 	switch($model){
 		case "category":{
@@ -85,6 +89,10 @@
 		}
 		case "user":{
 			switch($action){
+				case "disable":{
+					require_once("models/user/disable.php");
+					break;
+				}
 				case "login":{
 					require_once("models/user/login.php");
 					break;

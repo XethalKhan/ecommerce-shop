@@ -570,7 +570,7 @@ $(document).ready(function(){
 	$("#ticketTable").on("click", ".solve-ticket", function(e){
 		let tid = $(this).data("id");
 		$.ajax({
-			url: "127.0.0.1/utl/solveTicket.php",
+			url: "http://" + BASE_HREF + "/ticket/solve",
 			type: "post",
 			dataType: "json",
 			data: {

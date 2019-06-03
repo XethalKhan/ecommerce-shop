@@ -16,6 +16,9 @@
 		}
 
 		if($test == false){
+			$stmt = $conn->prepare("DELETE FROM session WHERE uid = ? AND hash = ?");
+			$stmt->execute([$_SESSION["uid"], $_COOKIE["session-id"]]);
+
 			setcookie("session-id", null, -1, SUBFOLDER . "/");
 			session_unset();
 			$_SESSION["msg"] = "Your session has expired, please log in";

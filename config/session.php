@@ -11,7 +11,7 @@
 			$test = false;
 		}
 
-		if($current_time - $last_time > 600){
+		if($current_time > $last_time){
 			$test = false;
 		}
 
@@ -22,9 +22,12 @@
 			setcookie("session-id", null, -1, SUBFOLDER . "/");
 			session_unset();
 			$_SESSION["msg"] = "Your session has expired, please log in";
-			header("Location: http://" . BASE_HREF . "/login");
+			//header("Location: http://" . BASE_HREF . "/login");
 		}else{
-			setcookie("session-id", $rs->hash, time() + 600, SUBFOLDER . "/");
+			$t = time() + 600;
+			$stmt = $conn->prepare("UPDATE session SET access = ? WHERE hash = ? AND uid = ?");
+			$stmt->execute([date("Y-m-d H:i:s", $t), $_COOKIE['session-id'], $_SESSION['uid']]);
+			setcookie("session-id", $rs->hash, $t, SUBFOLDER . "/");
 		}
 	}else{
 		echo "<script>document.cookie = 'session-id=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';</script>";

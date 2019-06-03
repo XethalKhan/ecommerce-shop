@@ -16,8 +16,16 @@
 	switch($model){
 		case "category":{
 			switch($action){
+				case "insert":{
+					require_once("models/category/insert.php");
+					break;
+				}
 				case "search":{
 					require_once("models/category/search.php");
+					break;
+				}
+				case "update":{
+					require_once("models/category/update.php");
 					break;
 				}
 			}

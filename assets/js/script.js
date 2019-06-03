@@ -686,10 +686,10 @@ $(document).ready(function(){
 	});
 
 	$("#catTable").on("click", ".cat-update", function(){
-		var row = $(this).parent().parent();
-		var name = row.find(".cat-name").text();
-		var desc = row.find(".cat-desc").text();
-		var id = $(this).data("id");
+		let row = $(this).parent().parent();
+		let name = row.find(".cat-name").text();
+		let desc = row.find(".cat-desc").text();
+		let id = $(this).data("id");
 		$("#tbName").val(name);
 		$("#txtDesc").val(desc);
 		$("#catID").val(id);
@@ -704,13 +704,13 @@ $(document).ready(function(){
 	});
 
 	$("#btnInsertCategory").click(function(){
-		var val = $(this).val();
-		var name = $("#tbName").val();
-		var desc = $("#txtDesc").val();
+		let val = $(this).val();
+		let name = $("#tbName").val();
+		let desc = $("#txtDesc").val();
 		alert(val);
 		if(val == "Insert"){
 			$.ajax({
-				url: "127.0.0.1/utl/insertCat.php",
+				url: "http://" + BASE_HREF + "/category/insert",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -727,10 +727,10 @@ $(document).ready(function(){
 				}
 			});	
 		}else if(val == "Update"){
-			var id = $("#catID").val();
+			let id = $("#catID").val();
 
 			$.ajax({
-				url: "127.0.0.1/utl/updateCat.php",
+				url: "http://" + BASE_HREF + "/category/update",
 				type: "post",
 				dataType: "json",
 				data: {

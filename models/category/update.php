@@ -1,16 +1,14 @@
 <?php 
 	session_start();
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
-		require_once("db.php");
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
+		$query = "UPDATE category SET name = :name, info = :info WHERE id = :id";
 
-		$query = "INSERT INTO category(name, info) VALUES(:name, :info)";
-
+		$id = $_POST["id"];
 		$name = $_POST["name"];
 		$desc = $_POST["desc"];
 
 		$stmt = $conn->prepare($query);
+		$stmt->bindParam(":id", $id);
 		$stmt->bindParam(":name", $name);
 		$stmt->bindParam(":info", $desc);
 		$test = $stmt->execute();

@@ -1,15 +1,15 @@
 $(document).ready(function(){
 
 	$("#btnSignup").click(function(){
-		var fn = $("#tbFn").val();
-		var ln = $("#tbLn").val();
+		let fn = $("#tbFn").val();
+		let ln = $("#tbLn").val();
 		fn = fn.substring(0, 100).trim();
 		ln = ln.substring(0, 100).trim();
-		var mail = $("#tbMail").val();
-		var user = $("#tbUserSign").val();
-		var pass = $("#tbPassSign").val();
-		var passRep = $("#tbPassRep").val();
-		var status = true;
+		let mail = $("#tbMail").val();
+		let user = $("#tbUserSign").val();
+		let pass = $("#tbPassSign").val();
+		let passRep = $("#tbPassRep").val();
+		let status = true;
 		
 		$(".err").text("");
 		$("#errList").text("");
@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "127.0.0.1/utl/signup.php",
+				url: "http://" + BASE_HREF + "/user/sign-up",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -64,14 +64,14 @@ $(document).ready(function(){
 					pass: pass
 				},
 				success: function(data, txt, xhr){
-					alert(xhr.status);
+					window.open("http://" + BASE_HREF + "login", "_self");
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 400){
 						$(".err").text("");
 						$("#errList").text("");
-						var data = JSON.parse(xhr.responseText);
-						var cnt = data.length;
+						let data = JSON.parse(xhr.responseText);
+						let cnt = data.length;
 						for(i = 0; i < cnt; i++){
 							$("#errList").append(data[i]["msg"] + "<br/>");
 							$("#" + data[i]["id"]).text("*");

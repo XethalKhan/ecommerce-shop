@@ -1,7 +1,6 @@
 <?php 
 	header("Content-type: application/json");
 	if(isset($_POST["status"])){
-		require_once("db.php");
 
 		$user = trim($_POST["user"]);
 		$pass = trim($_POST["pass"]);
@@ -11,9 +10,6 @@
 
 		$errArr = array();
 		$status = true;
-
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
 
 		$userExists = $conn->prepare("SELECT * FROM user WHERE username = :username");
 		$userExists->bindParam(":username", $user);
@@ -40,6 +36,7 @@
 			$errArr[] = array("id" => "passErr", "msg" => "Password is not in valid form");
 		}
 		if($status == true){
+			$pass = md5($pass);
 			$stmt = $conn->prepare(
 				"INSERT INTO user(username, password, email, firstname, lastname) ".
 				"VALUES(:username, :password, :email, :firstname, :lastname)");
@@ -49,6 +46,8 @@
 			$stmt->bindParam(":firstname",$fn);
 			$stmt->bindParam(":lastname",$ln);
 			$stmt->execute();
+			session_start();
+			$_SESSION["msg"] = "User successfully created";
 			http_response_code(203);
 			echo json_encode("User successfully created");
 		}

@@ -113,6 +113,10 @@
 					require_once("models/user/search.php");
 					break;
 				}
+				case "sign-up":{
+					require_once("models/user/sign-up.php");
+					break;
+				}
 			}
 			break;
 		}

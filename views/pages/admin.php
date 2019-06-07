@@ -28,36 +28,29 @@
 		<table id="tickets-table" class="table table-hover text-center">
 			<thead>
 				<tr>
-					<th>Ticket id</th>
-					<th>User</th>
-					<th>Request</th>
-					<th>Date</th>
+					<th>Page</th>
+					<th>Time</th>
+					<th>User ID</th>
+					<th>Session ID</th>
+					<th>IP address</th>
 				</tr>
 			</thead>
 			<tbody>
 			<?php 
-				$stmt = $conn->prepare(
-					"SELECT " .
-						"t.id AS id, " .
-						"u.username AS username, " .
-						"t.request AS request, " .
-						"t.date AS date ".
-					"FROM ticket t " .
-					"INNER JOIN user u " .
-					"ON u.id = t.id_c " .
-					"ORDER BY t.date DESC " .
-					"LIMIT 10");
-				$stmt->execute();
-				$rs=$stmt->fetchall();
-				foreach($rs as $ticket){
+				$name = date("dmy") . ".txt";
+				$log = file(BASE_FILE . "/data/session/" . $name);
+				$cnt = count($log);
+				$i = $cnt < 15 ? 0 : $cnt - 15;
+				for(; $i < $cnt; $i++){
+					$row = trim($log[$i]);
+					$row = explode("\t", $row);
 					echo "<tr>" .
-						"<td>" . $ticket->id . "</td>" .
-						"<td>" . $ticket->username . "</td>" .
-						"<td>" . 
-							(strlen($ticket->request) > 100 ? substr($ticket->request, 0, 95) . ". . ." : $ticket->request) . 
-						"</td>" .
-						"<td>" . date("d.m.Y", strtotime($ticket->date)) . "</td>" .
-					"</tr>";
+						"<td><a href=\"http://" . BASE_HREF . "/" . $row[0] . "\">" . $row[0] . "</a></td>" .
+						"<td>" . $row[1] . "</td>" .
+						"<td>" . $row[2] . "</td>" .
+						"<td>" . $row[3] . "</td>" .
+						"<td>" . $row[4] . "</td>" .
+						"</tr>";
 				}
 			?>
 			</tbody>

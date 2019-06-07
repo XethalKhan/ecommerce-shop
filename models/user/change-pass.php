@@ -8,13 +8,9 @@
 		$user = $_SESSION["uid"];
 		$status = true;
 
-		require_once("db.php");
-		$crm = new DB("root", "root");
-		$conn = $crm->getInstance();
-
 		$goodPass = $conn->prepare("SELECT * FROM user WHERE id = :id AND password = :password");
 		$goodPass->bindParam(":id", $user);
-		$goodPass->bindParam(":password", $old);
+		$goodPass->bindParam(":password", $oldMD);
 		$goodPass->execute();
 		$row = $goodPass->fetch();
 		if(!($row)){

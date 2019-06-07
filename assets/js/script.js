@@ -193,10 +193,10 @@ $(document).ready(function(){
 	});
 
 	$("#btnChangePass").click(function(){
-		var old = $("#tbOld").val();
-		var newPass = $("#tbNewPass").val();
-		var newPassRep = $("#tbNewPassRep").val();
-		var status = true;
+		let old = $("#tbOld").val();
+		let newPass = $("#tbNewPass").val();
+		let newPassRep = $("#tbNewPassRep").val();
+		let status = true;
 		
 		$(".err").text("");
 		$("#errList").text("");
@@ -237,7 +237,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "127.0.0.1/utl/changePass.php",
+				url: "http://" + BASE_HREF + "/user/change-pass",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -246,14 +246,14 @@ $(document).ready(function(){
 					newRep: newPassRep
 				},
 				success: function(data, txt, xhr){
-					window.open("utl/logout.php", "_self");
+					window.open("http://" + BASE_HREF + "/user/logout", "_self");
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 400){
 						$(".err").text("");
 						$("#errList").text("");
-						var data = JSON.parse(xhr.responseText);
-						var cnt = data.length;
+						let data = JSON.parse(xhr.responseText);
+						let cnt = data.length;
 						for(i = 0; i < cnt; i++){
 							$("#errList").append(data[i]["msg"] + "<br/>");
 							$("#" + data[i]["id"]).text("*");
@@ -265,7 +265,7 @@ $(document).ready(function(){
 	});
 
 	$("#txtTicket").on("keydown", function(e){
-		var txt = $("#txtTicket").val();
+		let txt = $("#txtTicket").val();
 		if(txt.length < 50){
 			$("#txtErr").text("*");
 		}else{

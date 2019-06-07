@@ -93,6 +93,10 @@
 		}
 		case "user":{
 			switch($action){
+				case "change-pass":{
+					require_once("models/user/change-pass.php");
+					break;
+				}
 				case "disable":{
 					require_once("models/user/disable.php");
 					break;

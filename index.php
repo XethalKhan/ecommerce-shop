@@ -33,6 +33,9 @@
 			case "categories":
 				require_once("views/pages/categories.php");
 				break;
+			case "change-pass":
+				require_once("views/pages/change-pass.php");
+				break;
 			case "home":
 				require_once("views/pages/home.php");
 				break;

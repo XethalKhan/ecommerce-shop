@@ -120,7 +120,8 @@
 			</div>
 			<div class="row profileRow">
 				<div class="col-sm-6 text-center">
-					<input type="button" class="formBtn" value="Change password" onclick="window.open('changePass.php', '_self')" />
+					<input type="button" class="formBtn" value="Change password" onclick="window.open(
+					<?php echo "'http://" . BASE_HREF . "/change-pass'";?>, '_self')" />
 				</div>
 				<div class="col-sm-6 text-center">
 					New login password

@@ -274,8 +274,8 @@ $(document).ready(function(){
 	});
 
 	$("#btnNewTicket").click(function(){
-		var txt = $("#txtTicket").val();
-		var status = true;
+		let txt = $("#txtTicket").val();
+		let status = true;
 
 		$("#txtErr").text("");
 		if(txt.length < 50){
@@ -285,7 +285,7 @@ $(document).ready(function(){
 
 		if(status == true){
 			$.ajax({
-				url: "127.0.0.1/utl/newTicket.php",
+				url: "http://" + BASE_HREF + "/ticket/insert",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -298,8 +298,8 @@ $(document).ready(function(){
 				error: function(xhr, status, error){
 					$(".err").text("");
 					$("#errList").text("");
-					var data = JSON.parse(xhr.responseText);
-					var cnt = data.length;
+					let data = JSON.parse(xhr.responseText);
+					let cnt = data.length;
 					for(i = 0; i < cnt; i++){
 						$("#errList").append(data[i]["msg"] + "<br/>");
 						$("#" + data[i]["id"]).text("*");

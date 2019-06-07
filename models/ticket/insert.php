@@ -8,10 +8,6 @@
 			$errArr = array();
 			$cnt = 0;
 
-			require_once("db.php");
-			$crm = new DB("root", "root");
-			$conn = $crm->getInstance();
-
 			$stmt = $conn->prepare("SELECT MAX(id) AS max FROM ticket");
 			$stmt->execute();
 			$rs = $stmt->fetch();

@@ -76,6 +76,10 @@
 					require_once("models/ticket/dismiss.php");
 					break;
 				}
+				case "insert":{
+					require_once("models/ticket/insert.php");
+					break;
+				}
 				case "search":{
 					require_once("models/ticket/search.php");
 					break;

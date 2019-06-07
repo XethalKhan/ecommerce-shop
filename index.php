@@ -42,6 +42,9 @@
 			case "new-product":
 				require_once("views/pages/new-product.php");
 				break;
+			case "new-ticket":
+				require_once("views/pages/new-ticket.php");
+				break;
 			case "order":
 				require_once("views/pages/order.php");
 				break;

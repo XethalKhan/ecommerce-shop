@@ -128,7 +128,8 @@
 			</div>
 			<div class="row profileRow">
 				<div class="col-sm-6 text-center">
-					<input type="button" class="formBtn" value="New ticket" onclick="window.open('newTicket.php', '_self')" />
+					<input type="button" class="formBtn" value="New ticket" onclick="window.open(
+						<?php echo "'http://" . BASE_HREF . "/new-ticket'";?>, '_self')" />
 				</div>
 				<div class="col-sm-6 text-center">
 					Contact us if there are any issues with our services

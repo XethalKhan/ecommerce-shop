@@ -16,8 +16,8 @@
 		}
 
 		if($test == false){
-			$stmt = $conn->prepare("DELETE FROM session WHERE uid = ? AND hash = ?");
-			$stmt->execute([$_SESSION["uid"], $_COOKIE["session-id"]]);
+			$stmt = $conn->prepare("DELETE FROM session WHERE uid = ?");
+			$stmt->execute([$_SESSION["uid"]]);
 
 			setcookie("session-id", null, -1, SUBFOLDER . "/");
 			session_unset();

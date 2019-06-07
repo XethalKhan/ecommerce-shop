@@ -12,6 +12,7 @@
 <?php 
 	require_once("views/fixed/head-meta.php");
 	require_once("config/session.php");
+	require_once("config/statistics.php");
 ?>
 <body class="container-fluid">
 	<?php 

@@ -7,6 +7,7 @@
 	define("UNAUTHORIZED_USER", env("UNAUTHORIZED_USER"));
 	define("UNAUTHORIZED_PASS", env("UNAUTHORIZED_PASS"));
 	define("LOG", env("LOG"));
+	define("STATISTICS", env("STATISTICS"));
 
 	function env($find){
 		$envConf = file(BASE_FILE . "/config/.env");

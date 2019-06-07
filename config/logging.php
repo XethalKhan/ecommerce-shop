@@ -2,6 +2,7 @@
 	if(LOG=='on'){
 		$name = date("dmy");
 
+		//<LOGGING ACCESS>
 		$file = fopen(BASE_FILE . "/data/session/" . $name . ".txt", "a");
 
 		$string = 
@@ -14,5 +15,6 @@
 		fwrite($file, $string);
 
 		fclose($file);
+		//</LOGGING ACCESS>
 	}
 ?>

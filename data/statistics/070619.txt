@@ -1,0 +1,8 @@
+/admin	7
+/home	2
+/product-list	1
+/about	1
+/author	1
+/user-list	1
+/user/29	1
+/user/32	1

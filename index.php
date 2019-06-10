@@ -67,6 +67,9 @@
 			case "product-list":
 				require_once("views/pages/product-list.php");
 				break;
+			case "session-list":
+				require_once("views/pages/session-list.php");
+				break;
 			case "sign-up":
 				require_once("views/pages/sign-up.php");
 				break;

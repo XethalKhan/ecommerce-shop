@@ -24,6 +24,14 @@
 			<h2>CATEGORIES</h2>
 		</a>
 	</div>
+	<div class="row admin-row">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/session-list\"";?>>
+			<h2>SESSIONS</h2>
+		</a>
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/session-list\"";?>>
+			<h2>CATEGORIES</h2>
+		</a>
+	</div>
 	<div id="tickets" class="row">
 		<table id="tickets-table" class="table table-hover text-center">
 			<thead>

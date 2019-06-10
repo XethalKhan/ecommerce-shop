@@ -9,7 +9,7 @@
 			$stmt->execute();
 			$rs = $stmt->fetch();
 	?>
-	<form id="formSignup" method="post" action="modUser.php" enctype="multipart/form-data" clas="form-inline">
+	<form id="formSignup" method="post" action=<?php echo "'http://" . BASE_HREF."/user/change-info'";?> enctype="multipart/form-data" clas="form-inline">
 		<div class="row formRow">
 			<div class="col-12 text-center">
 				<h1>Modify user info</h1>
@@ -50,7 +50,12 @@
 		<div class="row formRow">
 			<div class="col-md-12 text-center">
 				<p id="errList">
-					<?php echo $err; ?>
+					<?php 
+						if(isset($_SESSION["msg"])){
+							echo $_SESSION["msg"] . "<br/>";
+							unset($_SESSION["msg"]);
+						}
+					?>
 				</p>
 			</div>
 		</div>

@@ -1,0 +1,2 @@
+/home	2
+/product-list	1

@@ -6,3 +6,4 @@
 /user-list	1
 /user/29	1
 /user/32	1
+	1

@@ -112,7 +112,7 @@
 			<div class="row profileRow">
 				<div class="col-sm-6 text-center">
 					<input type="button" class="formBtn" value="Modify personal info" onclick="window.open(
-					<?php echo "'modUser.php?uid=" . $_GET["id"]. "'";?>, '_self')" />
+					<?php echo "'http://" . BASE_HREF . "/user-change/" . $_GET["id"] . "'";?>, '_self')" />
 				</div>
 				<div class="col-sm-6 text-center">
 					Modify personal information <br/>(username, e-mail, firstname, lastname)

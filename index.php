@@ -76,6 +76,9 @@
 			case "user":
 				require_once("views/pages/user.php");
 				break;
+			case "user-change":
+				require_once("views/pages/user-change.php");
+				break;
 			case "user-list":
 				require_once("views/pages/user-list.php");
 				break;

@@ -1,0 +1,9 @@
+1	
+/login	2
+/home	4
+/admin	3
+/user/29	9
+/user-xhange	1
+/user-change/29	2
+/user-change	1
+/change-pass/29	2

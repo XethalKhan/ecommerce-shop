@@ -114,7 +114,7 @@
 				    					"<a href=\"#\" data-id=\"" . $prod["id"] . "\">" . substr($prod["name"], 0, 30) . "</a>"  . 
 				    				"</li>";
 				    		}
-				    		echo "<li class=\"divider\"><hr/></li><li class=\"text-center\"><a href=\"completeOrder.php\">Complete order</a>";
+				    		echo "<li class=\"divider\"><hr/></li><li class=\"text-center\"><a href=\"http://" . BASE_HREF . "/order-complete\">Complete order</a>";
 			    	}else{
 			    		echo "<li>&nbsp;&nbsp;&nbsp;No products selected</li>";
 					}

@@ -52,6 +52,9 @@
 			case "order":
 				require_once("views/pages/order.php");
 				break;
+			case "order-complete":
+				require_once("views/pages/order-complete.php");
+				break;
 			case "order-list":
 				require_once("views/pages/order-list.php");
 				break;

@@ -1014,7 +1014,7 @@ $(document).ready(function(){
 					$(".dropdown-menu").append(items);
 					$(".dropdown-menu").append(
 						"<li class=\"divider\"><hr/></li>" +
-						"<li class=\"text-center\"><a href=\"completeOrder.php\">Complete order</a>");
+						"<li class=\"text-center\"><a href=\"http://" + BASE_HREF + "/order-complete\">Complete order</a>");
 				}else if(xhr.status == 201){
 					$(".dropdown-menu").html("");
 					$(".dropdown-menu").append("<li>&nbsp;&nbsp;&nbsp;No products selected</li>");

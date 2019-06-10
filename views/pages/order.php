@@ -64,8 +64,8 @@
 		    				"<td>" . substr($prod->name, 0, 30) . "</td>" .
 							"<td>" . $prod->quantity . "</td>" .
 		    				"<td>$" . number_format((float)$prod->price, 2, ",", ".") ."</td>" .
-		    				"<td>" . ((double)$prod->quantity * ((double)$prod->price) * (100 - (double)$prod->discount) / 100) ."</td>" .
-		    				"<td>" . "<a href=\"prod.php?pid=" . $prod->id . "\">Details</a>" .  "</td>" .
+		    				"<td>$" . number_format((double)$prod->quantity * ((double)$prod->price) * (100 - (double)$prod->discount) / 100, 2) ."</td>" .
+		    				"<td>" . "<a href=\"http://" . BASE_HREF . "/product/" . $prod->id . "\">Details</a>" .  "</td>" .
 	    				"</tr>";
 	    		}
 	    	?>

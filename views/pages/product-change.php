@@ -10,7 +10,7 @@
 			$stmt->execute();
 			$rs = $stmt->fetch();
 	?>
-	<form id="formModProd" method="post" enctype="multipart/form-data" action="modProd.php">
+	<form id="formModProd" method="post" enctype="multipart/form-data" <?php echo "action='http://" . BASE_HREF . "/product/update'";?>>
 		<div class="row formRow">
 			<div class="col-md-12 text-center">
 				<img src = "assets/img/logo.png" width="150px" height="150px"/>
@@ -133,7 +133,10 @@
 			<div class="col-md-12 text-center">
 				<p id="errList">
 					<?php 
-						echo $status;
+						if(isset($_SESSION["msg"])){
+							echo $_SESSION["msg"] . "<br/>";
+							unset($_SESSION["msg"]);
+						}
 					?>
 				</p>
 			</div>

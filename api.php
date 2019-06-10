@@ -58,6 +58,10 @@
 					require_once("models/product/search.php");
 					break;
 				}
+				case "update":{
+					require_once("models/product/update.php");
+					break;
+				}
 			}
 			break;
 		}

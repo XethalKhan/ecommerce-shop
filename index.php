@@ -58,6 +58,9 @@
 			case "product":
 				require_once("views/pages/product.php");
 				break;
+			case "product-change":
+				require_once("views/pages/product-change.php");
+				break;
 			case "product-list":
 				require_once("views/pages/product-list.php");
 				break;
@@ -89,5 +92,5 @@
 
 		require_once("views/fixed/footer.php");
 	?>
-</body>
+	</body>
 </html>

@@ -94,7 +94,7 @@
 								<div class="col-sm-6 text-center">
 									<?php 
 										echo "<input type=\"button\" class=\"formBtn\" value=\"Modify product info\"" .
-												" onclick=\"window.open('modProd.php?pid=" . $_GET["id"]. "', '_self')\" />";
+												" onclick=\"window.open('http://" . BASE_HREF . "/product-change/" . $_GET["id"]. "', '_self')\" />";
 									?>
 								</div>
 								<div class="col-sm-6 text-center">

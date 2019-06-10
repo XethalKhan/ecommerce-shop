@@ -66,7 +66,7 @@
 		</div>
 	</div>
 </div>
-<form id="formUploadOrder" method="post" enctype="multipart/form-data" action="completeOrder.php">
+<form id="formUploadOrder" method="post" enctype="multipart/form-data" action=<?php echo "\"http://" . BASE_HREF . "/order/complete\""; ?>>
 	<div class="row formRow">
 		<div class="col-md-3 text-center">
 			<h4 class="signupLabel">Address:<span class="err" id="nameErr"></span></h4>

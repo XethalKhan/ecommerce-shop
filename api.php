@@ -41,6 +41,10 @@
 					require_once("models/order/add.php");
 					break;
 				}
+				case "complete":{
+					require_once("models/order/complete.php");
+					break;
+				}
 				case "search":{
 					require_once("models/order/search.php");
 					break;

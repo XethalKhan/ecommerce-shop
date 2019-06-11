@@ -666,8 +666,8 @@ $(document).ready(function(){
 										'</td>' +
 										'<td>' + data[i]["request"] + '</td>' +
 										'<td>' + 
-											'<a href=\"#\ class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '>Solved</a>' +
-											'<a href=\"#\ class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '>Dismiss</a>' +
+											'<a href=\"#\" class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '\"">Solved</a><br/>' +
+											'<a href=\"#\" class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '\"">Dismiss</a>' +
 										 '</td>' + 
 									'</tr>');
 							}

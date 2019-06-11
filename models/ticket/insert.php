@@ -6,17 +6,6 @@
 			$txt = $_POST["txtTicket"];
 			$status = true;
 			$errArr = array();
-			$cnt = 0;
-
-			$stmt = $conn->prepare("SELECT MAX(id) AS max FROM ticket");
-			$stmt->execute();
-			$rs = $stmt->fetch();
-
-			if($rs){
-				$cnt = $rs->max;
-			}
-
-			$cnt = $cnt + 1;
 
 			if(strlen($txt) < 50){
 				$status = false;
@@ -24,15 +13,13 @@
 			}
 
 			if($status = true){
-				$stmt = $conn->prepare("INSERT INTO ticket(id, id_c, request) VALUES(:id, :id_c, :request)");
-				$stmt->bindParam(":id", $cnt);
-				$stmt->bindParam(":id_c", $uid);
-				$stmt->bindParam(":request", $txt);
-				$test = $stmt->execute();
-
-				if($test == true){
+				$id = ticket_insert($uid, $txt);
+				if($id > 0){
 					http_response_code(200);
-					echo json_encode($cnt); 
+					echo json_encode($id); 
+				}else{
+					http_response_code(500);
+					echo json_encode("Internal server error"); 
 				}
 			}else{
 				http_response_code(400);

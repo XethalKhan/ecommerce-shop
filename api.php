@@ -82,6 +82,7 @@
 			break;
 		}
 		case "ticket":{
+			require_once("models/ticket/functions.php");
 			switch($action){
 				case "dismiss":{
 					require_once("models/ticket/dismiss.php");

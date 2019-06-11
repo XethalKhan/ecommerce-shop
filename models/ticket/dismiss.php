@@ -3,18 +3,12 @@
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
 		$id = $_POST["id"];
 
-		$query = "UPDATE `ticket` SET status = 1 WHERE id = :id";
-
-		$stmt = $conn->prepare($query);
-		$stmt->bindParam(":id", $id);
-		$test = $stmt->execute();
-
-		if($test == true){
+		if(dismiss_ticket($id) == true){
 			http_response_code(200);
 			echo json_encode("Success");
 		}else{
-			http_response_code(400);
-			echo json_encode("Bad request");
+			http_response_code(500);
+			echo json_encode("Internal server error");
 		}
 	}else{
 		http_response_code(401);

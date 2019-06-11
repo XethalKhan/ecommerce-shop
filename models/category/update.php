@@ -1,24 +1,17 @@
 <?php 
 	session_start();
 	if(isset($_SESSION["uid"]) && $_SESSION["gid"] == 1){
-		$query = "UPDATE category SET name = :name, info = :info WHERE id = :id";
 
 		$id = $_POST["id"];
 		$name = $_POST["name"];
 		$desc = $_POST["desc"];
 
-		$stmt = $conn->prepare($query);
-		$stmt->bindParam(":id", $id);
-		$stmt->bindParam(":name", $name);
-		$stmt->bindParam(":info", $desc);
-		$test = $stmt->execute();
-
-		if($test == true){
+		if(category_update($id, $name, $desc) == true){
 			http_response_code(200);
 			echo json_encode("Success");
 		}else{
 			http_response_code(500);
-			echo json_encode("Internal error");
+			echo json_encode("Internal server error");
 		}
 	}else{
 		http_response_code(401);

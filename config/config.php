@@ -1,7 +1,7 @@
 <?php
 	define("SUBFOLDER", substr($_SERVER["SCRIPT_NAME"], 0, strrpos($_SERVER["SCRIPT_NAME"], '/')));
 	define("BASE_FILE", $_SERVER["DOCUMENT_ROOT"] . SUBFOLDER);
-	define("BASE_HREF", $_SERVER["SERVER_ADDR"] . SUBFOLDER);
+	define("BASE_HREF", $_SERVER["HTTP_HOST"] . SUBFOLDER);
 	define("DATABASE", env("DATABASE"));
 	define("HOST", env("HOST"));
 	define("UNAUTHORIZED_USER", env("UNAUTHORIZED_USER"));

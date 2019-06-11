@@ -1,0 +1,1 @@
+01:19:45	SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'postal_code' cannot be null

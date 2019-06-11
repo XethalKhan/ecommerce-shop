@@ -36,6 +36,7 @@
 			break;
 		}
 		case "order":{
+			require_once("models/order/functions.php");
 			switch($action){
 				case "add":{
 					require_once("models/order/add.php");

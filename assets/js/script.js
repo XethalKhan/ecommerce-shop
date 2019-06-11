@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "http://" + BASE_HREF + "/user/sign-up",
+				url: "http://" + BASE_HREF + "user/sign-up",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -237,7 +237,7 @@ $(document).ready(function(){
 
 		if(status){
 			$.ajax({
-				url: "http://" + BASE_HREF + "/user/change-pass",
+				url: "http://" + BASE_HREF + "user/change-pass",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -246,7 +246,7 @@ $(document).ready(function(){
 					newRep: newPassRep
 				},
 				success: function(data, txt, xhr){
-					window.open("http://" + BASE_HREF + "/user/logout", "_self");
+					window.open("http://" + BASE_HREF + "user/logout", "_self");
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 400){
@@ -285,7 +285,7 @@ $(document).ready(function(){
 
 		if(status == true){
 			$.ajax({
-				url: "http://" + BASE_HREF + "/ticket/insert",
+				url: "http://" + BASE_HREF + "ticket/insert",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -629,7 +629,7 @@ $(document).ready(function(){
 	$("#ticketTable").on("click", ".dismiss-ticket", function(e){
 		let tid = $(this).data("id");
 		$.ajax({
-			url: "http://" + BASE_HREF + "/ticket/dismiss",
+			url: "http://" + BASE_HREF + "ticket/dismiss",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -710,7 +710,7 @@ $(document).ready(function(){
 		alert(val);
 		if(val == "Insert"){
 			$.ajax({
-				url: "http://" + BASE_HREF + "/category/insert",
+				url: "http://" + BASE_HREF + "category/insert",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -730,7 +730,7 @@ $(document).ready(function(){
 			let id = $("#catID").val();
 
 			$.ajax({
-				url: "http://" + BASE_HREF + "/category/update",
+				url: "http://" + BASE_HREF + "category/update",
 				type: "post",
 				dataType: "json",
 				data: {
@@ -984,7 +984,7 @@ $(document).ready(function(){
 		number = int => overwrite
 		*/
 		$.ajax({
-			url: "http://" + BASE_HREF + "/order/add",
+			url: "http://" + BASE_HREF + "order/add",
 			type: "post",
 			dataType: "json",
 			data: {
@@ -995,29 +995,31 @@ $(document).ready(function(){
 			success: function(data, txt, xhr){
 				if(xhr.status == 200){
 					$(".dropdown-menu").html("");
-					let cnt = data.length;
+					let cnt = data == null ? 0 : data.length;
 					let items = "";
-					for(let i = 0; i < cnt; i++){
-						items = items + '<li>' + 
-								'&nbsp;&nbsp;&nbsp;' + 
-								'<i class=\"fa fa-plus plus-prod-add\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +
-				    			'&nbsp;&nbsp;&nbsp;' + 
-				    			'<span class=\"num-of-prod\">' + data[i]["number"] + '</span>' +
-				    			'&nbsp;&nbsp;&nbsp;' + 
-				    			'<i class=\"fa fa-minus minus-prod-add\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +
-				    			'&nbsp;&nbsp;&nbsp;' + 
-				    			'<i class=\"fa fa-times remove-prod\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +
-				    			'&nbsp;&nbsp;&nbsp;' + 
-				    			'<a href=\"#\" data-id=\"' + data[i]["id"] + '\">' + data[i]["name"].substr(0, 30) + '</a>' + 
-				    		'</li>'
+					if(cnt > 0){
+						for(let i = 0; i < cnt; i++){
+							items = items + '<li>' + 
+									'&nbsp;&nbsp;&nbsp;' + 
+									'<i class=\"fa fa-plus plus-prod-add\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +
+					    			'&nbsp;&nbsp;&nbsp;' + 
+					    			'<span class=\"num-of-prod\">' + data[i]["number"] + '</span>' +
+					    			'&nbsp;&nbsp;&nbsp;' + 
+					    			'<i class=\"fa fa-minus minus-prod-add\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +
+					    			'&nbsp;&nbsp;&nbsp;' + 
+					    			'<i class=\"fa fa-times remove-prod\" aria-hidden=\"true\" data-pid=\"' + data[i]["id"] + '\"></i>' +
+					    			'&nbsp;&nbsp;&nbsp;' + 
+					    			'<a href=\"#\" data-id=\"' + data[i]["id"] + '\">' + data[i]["name"].substr(0, 30) + '</a>' + 
+					    		'</li>'
+						}
+						$(".dropdown-menu").append(items);
+						$(".dropdown-menu").append(
+							"<li class=\"divider\"><hr/></li>" +
+							"<li class=\"text-center\"><a href=\"http://" + BASE_HREF + "order-complete\">Complete order</a>");
+					}else{
+						$(".dropdown-menu").html("");
+						$(".dropdown-menu").append("<li>&nbsp;&nbsp;&nbsp;No products selected</li>");
 					}
-					$(".dropdown-menu").append(items);
-					$(".dropdown-menu").append(
-						"<li class=\"divider\"><hr/></li>" +
-						"<li class=\"text-center\"><a href=\"http://" + BASE_HREF + "/order-complete\">Complete order</a>");
-				}else if(xhr.status == 201){
-					$(".dropdown-menu").html("");
-					$(".dropdown-menu").append("<li>&nbsp;&nbsp;&nbsp;No products selected</li>");
 				}
 			},
 			error: function(xhr, status, error){

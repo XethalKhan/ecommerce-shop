@@ -3,55 +3,16 @@
 	if(isset($_POST["pid"])){
 		if(isset($_SESSION["uid"])){
 			$pid = $_POST["pid"];
-			$number = $_POST["number"];
+			$number = isset($_POST["number"]) && preg_match("/^add|minus|[\d]+$/", $_POST["number"]) ? $_POST["number"] : "0";
 
-			if($number == "add"){
-				if(!(isset($_SESSION["order"][$pid]))){
-					$_SESSION["order"][$pid] = 0;
-				}
-				$_SESSION["order"][$pid] = $_SESSION["order"][$pid] + 1;
-			}else if($number == "minus"){
-				if(!(isset($_SESSION["order"][$pid]))){
-					$_SESSION["order"][$pid] = 0;
-				}
-				$_SESSION["order"][$pid] = $_SESSION["order"][$pid] - 1;
+			$order = order_add($pid, $number);
+
+			if(isset($order["err"])){
+				http_response_code(500);
+				echo json_encode($order);
 			}else{
-				if(!(isset($_SESSION["order"][$pid]))){
-					$_SESSION["order"][$pid] = 0;
-				}
-				$_SESSION["order"][$pid] = $number;
-			}
-			
-			$prodids = array();
-			foreach($_SESSION["order"] as $key=>$val){
-				if($_SESSION["order"][$key] <= 0){
-					unset($_SESSION["order"][$key]);
-				}else{
-					$prodids[] = $key;
-				}
-			}
-			if(!(empty($prodids))){
-				$instmt = "(" . implode(",", $prodids) . ")";
-				$query = "SELECT id, name FROM product WHERE id IN " . $instmt;
-
-				$stmt = $conn->prepare($query);
-				$stmt->execute();
-				$rs=$stmt->fetchall();
-
-				$orderQ = array();
-				foreach($rs as $names){
-					$orderQ[] = 
-						array(
-							"id" => $names->id,
-							"name" => $names->name,
-							"number" => $_SESSION["order"][$names->id]);
-				}
-
 				http_response_code(200);
-				echo json_encode($orderQ);
-			}else{
-				http_response_code(201);
-				echo json_encode("No products selected");
+				echo json_encode($order);
 			}
 		}else{
 			http_response_code(401);

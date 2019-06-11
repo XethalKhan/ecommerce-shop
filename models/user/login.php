@@ -3,40 +3,38 @@
 		$user = $_POST["tbUser"];
 		$pass = md5($_POST["tbPass"]);
 
-		$stmt = $conn->prepare("SELECT * FROM user WHERE username = :username");
-		$stmt->bindParam(":username", $user);
-		$stmt->execute();
-		$rs=$stmt->fetch();
-		if($rs){
+		$attempts = user_wrong($user);
+		if($attempts >= 0){
 			session_start();
-			if($rs->wrong > 4){
+			if($attempts == 4){
 				$_SESSION['msg'] = "Too many wrong attempts to login, please contact administrator with registred e-mail";
 				header("Location: http://" . BASE_HREF . "/login");
 				exit;
 			}
-			else if($rs->password == $pass){
-				$_SESSION['uid'] = $rs->id;
-				$_SESSION['gid'] = $rs->grp;
-				$_SESSION['user'] = $rs->username;
+			if(user_authenticate($user, $pass)){
+				$info = user_data($user);
+
+				if($info == false){
+					header("Location: http://" . BASE_HREF . "/login");
+				} 
+
+				$_SESSION['uid'] = $info->id;
+				$_SESSION['gid'] = $info->grp;
+				$_SESSION['user'] = $info->username;
 				$_SESSION['order'] = array();
-				$session_id = md5(time() + $_SESSION['uid'] + $_SESSION['gid']);
-				$t = time() + 600;
-				setcookie("session-id", $session_id, $t, SUBFOLDER . "/");
-				$stmt = $conn->prepare("INSERT INTO session(hash, uid, gid, access) VALUES(?, ?, ?, ?)");
-				$stmt->execute([$session_id, $_SESSION['uid'], $_SESSION['gid'], date("Y-m-d H:i:s", $t)]);
+				user_session_start();
 				header("Location: http://" . BASE_HREF . "/home");
 				exit;
 			}else{
-				$id = $rs->id;
-				$count = $rs->wrong + 1;
-				$wrongPass = $conn->prepare("UPDATE user SET wrong = :new_wrong WHERE id = :id");
-				$wrongPass->bindParam(":new_wrong", $count);
-				$wrongPass->bindParam(":id", $id);
-				$wrongPass->execute();
+				user_wrong_increase($user);
 				$_SESSION['msg'] = "Wrong password, please try again";
 				header("Location: http://" . BASE_HREF . "/login");
 				exit;
 			}
+		}else if($attempts == -2){
+			$_SESSION['msg'] = "Server error while logging in, please try again later";
+			header("Location: http://" . BASE_HREF . "/login");
+			exit;
 		}
 		else{
 			header("Location: http://" . BASE_HREF . "/sign-up");

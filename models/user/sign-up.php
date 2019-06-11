@@ -11,11 +11,7 @@
 		$errArr = array();
 		$status = true;
 
-		$userExists = $conn->prepare("SELECT * FROM user WHERE username = :username");
-		$userExists->bindParam(":username", $user);
-		$userExists->execute();
-		$row = $userExists->fetch();
-		if($row){
+		if(user_exists($user)){
 			$status = false;
 			$errArr[] = array("id" => "userErr", "msg" => "User already exists");
 		}
@@ -36,20 +32,16 @@
 			$errArr[] = array("id" => "passErr", "msg" => "Password is not in valid form");
 		}
 		if($status == true){
-			$pass = md5($pass);
-			$stmt = $conn->prepare(
-				"INSERT INTO user(username, password, email, firstname, lastname) ".
-				"VALUES(:username, :password, :email, :firstname, :lastname)");
-			$stmt->bindParam(":username", $user);
-			$stmt->bindParam(":password", $pass);
-			$stmt->bindParam(":email", $mail);
-			$stmt->bindParam(":firstname",$fn);
-			$stmt->bindParam(":lastname",$ln);
-			$stmt->execute();
-			session_start();
-			$_SESSION["msg"] = "User successfully created";
-			http_response_code(203);
-			echo json_encode("User successfully created");
+			
+			if(user_signup($user, $pass, $mail, $fn, $ln) == true){
+				session_start();
+				$_SESSION["msg"] = "User successfully created";
+				http_response_code(203);
+				echo json_encode("User successfully created");
+			}else{
+				http_response_code(500);
+				echo json_encode("Internal server error");
+			}
 		}
 		else{
 			http_response_code(400);

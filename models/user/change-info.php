@@ -11,6 +11,10 @@
 		$ln = trim($_POST["tbLn"]);
 		$uid = $_POST["uid"];
 
+		if(user_exists($user)){
+			$test = false;
+			$msg = "Username already exists!";
+		}
 		if(empty($fn)){
 			$test = false;
 			$msg = "Firstname must not be empty!";
@@ -24,15 +28,12 @@
 			$msg = "E-mail is in bad format!";
 		}
 		if($test == true){
-			$stmt = $conn->prepare(
-				"UPDATE user SET firstname = :firstname, lastname = :lastname, username = :username, email = :email WHERE id = :id");
-			$stmt->bindParam(":firstname", $fn);
-			$stmt->bindParam(":lastname", $ln);
-			$stmt->bindParam(":username", $user);
-			$stmt->bindParam(":email",$mail);
-			$stmt->bindParam(":id",$uid);
-			$stmt->execute();
-			$msg = "User information successfully updated";
+			if(user_update($uid, $fn, $ln, $user, $mail)){
+				$msg = "User information successfully updated";
+				$_SESSION["user"] = $user;
+			}else{
+				http_response_code(500);
+			}
 		}
 	}else{
 		$msg = "Bad request, try again";

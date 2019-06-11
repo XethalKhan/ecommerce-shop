@@ -8,12 +8,7 @@
 		$user = $_SESSION["uid"];
 		$status = true;
 
-		$goodPass = $conn->prepare("SELECT * FROM user WHERE id = :id AND password = :password");
-		$goodPass->bindParam(":id", $user);
-		$goodPass->bindParam(":password", $oldMD);
-		$goodPass->execute();
-		$row = $goodPass->fetch();
-		if(!($row)){
+		if(!(user_authenticate($_SESSION["user"], $oldMD))){
 			$status = false;
 			$errArr[] = array("id" => "oldErr", "msg" => "Wrong password");
 		}
@@ -32,13 +27,13 @@
 		}
 		$newPass = md5($newPass);
 		if($status == true){
-			$stmt = $conn->prepare(
-				"UPDATE user SET password = :password WHERE id = :id");
-			$stmt->bindParam(":password", $newPass);
-			$stmt->bindParam(":id", $user);
-			$stmt->execute();
-			http_response_code(203);
-			echo json_encode("SUCCESS");
+			if(user_password_update($user, $newPass)){
+				http_response_code(203);
+				echo json_encode("SUCCESS");
+			}else{
+				http_response_code(500);
+				echo json_encode("Internal server error");
+			}
 		}else{
 			http_response_code(400);
 			echo json_encode($errArr);

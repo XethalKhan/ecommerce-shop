@@ -104,6 +104,7 @@
 			break;
 		}
 		case "user":{
+			require_once("models/user/functions.php");
 			switch($action){
 				case "change-info":{
 					require_once("models/user/change-info.php");

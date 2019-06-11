@@ -12,10 +12,7 @@
 			if($rs->cnt > 0){
 				header("Location: http://" . BASE_HREF . "/user/" . $_GET["id"]);
 			}else{
-				$stmt = $conn->prepare("UPDATE user SET status = 1 WHERE id = :id");
-				$stmt->bindParam(":id", $uid);
-				$test = $stmt->execute();
-				if($test == true){
+				if(user_disable($uid)){
 					http_response_code(200);
 					if($_SESSION["uid"] == $_GET["uid"]){
 						session_destroy();
@@ -23,6 +20,8 @@
 					}else{
 						header("Location: http://" . BASE_HREF . "/user/" . $_GET["id"]);
 					}
+				}else{
+					http_response_code(500);
 				}
 			}
 		}else{

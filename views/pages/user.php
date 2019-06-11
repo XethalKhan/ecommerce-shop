@@ -152,7 +152,7 @@
 			<div class="row profileRow">
 				<div class="col-sm-6 text-center">
 					<input type="button" class="formBtn" value="Modify personal info" onclick="window.open(
-					<?php echo "'modUser.php?uid=" . $_GET["id"]. "'";?>, '_self')" />
+					<?php echo "'http://" . BASE_HREF . "/user-change/" . $_GET["id"] . "'";?>, '_self')" />
 				</div>
 				<div class="col-sm-6 text-center">
 					Modify personal information <br/>(username, e-mail, firstname, lastname)
@@ -171,7 +171,7 @@
 					<?php 
 						echo "<input type=\"button\" class=\"formBtn\"";
 						if($rs->status == 0){
-							echo "value=\"Disable account\" onclick=\"window.open('utl/disableAcc.php?uid=" . $_GET["id"]. "', '_self')\" />";
+							echo "value=\"Disable account\" onclick=\"window.open('http://" . BASE_HREF . "/user/disable/" . $_GET["id"]. "', '_self')\" />";
 						}else{
 							echo "value=\"Enable account\" onclick=\"window.open('utl/enableAcc.php?uid=" . $_GET["id"]. "', '_self')\" />";
 						}

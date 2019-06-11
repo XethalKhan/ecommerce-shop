@@ -70,6 +70,7 @@
 			break;
 		}
 		case "survey":{
+			require_once("models/survey/functions.php");
 			switch($action){
 				case "answer":{
 					require_once("models/survey/answer.php");

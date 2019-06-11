@@ -1,5 +1,4 @@
 RewriteEngine On
-RewriteBase /
 
 #Rule 1: Look for the article title
 RewriteRule   ^([a-z-]+)/?$   index.php?page=$1   [L]

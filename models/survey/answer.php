@@ -39,30 +39,17 @@
 		}
 
 		if($status == true){
-			$stmt = $conn->prepare(
-				"INSERT INTO survey(id_c, gender, findout, findout_txt, product, delivery, comment) ".
-				"VALUES(:idc, :gender, :findout, :findout_txt, :product, :delivery, :comment)");
 			$idc = $_SESSION["uid"];
-			$stmt->bindParam(":idc", $idc);
-			$stmt->bindParam(":gender", $gender);
-			$stmt->bindParam(":findout", $learnVal);
-			$stmt->bindParam(":findout_txt", $learnTxt);
-			$stmt->bindParam(":product",$prodGrade);
-			$stmt->bindParam(":delivery",$deliveryGrade);
-			$stmt->bindParam(":comment",$comm);
-			$stmt->execute();
 
-			foreach($products as $p){
-				$stmt = $conn->prepare(
-					"INSERT INTO survey_cbx(id, val) ".
-					"VALUES(:c_id, :val)");
-				$stmt->bindParam(":c_id", $idc);
-				$stmt->bindParam(":val", $p);
-				$stmt->execute();
+			$test = survey_answer($idc, $gender, $learnVal, $learnTxt, $prodGrade, $deliveryGrade, $comm, $products);
+
+			if($test == true){
+				http_response_code(200);
+				echo json_encode("Success");
+			}else{
+				http_response_code(500);
+				echo json_encode("Internal server error");
 			}
-
-			http_response_code(200);
-			echo json_encode("Success");
 		}
 		else{
 			http_response_code(400);

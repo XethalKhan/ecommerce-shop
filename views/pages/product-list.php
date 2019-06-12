@@ -104,7 +104,7 @@
 					}
 					echo "<div class=\"search-prod col-sm-4\">" .
 							"<div class=\" text-center\">" .
-								"<img src=\"assets/images/" . $prod->img . "\" width=\"auto\" height=\"150\"/>" .
+								"<img src=\"assets/images/small_" . $prod->img . "\"/>" .
 							"</div>" .
 							"<div class=\"row search-details\">" .
 								"<div class=\"col-sm-9 text-center\">" .

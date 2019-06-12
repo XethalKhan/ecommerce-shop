@@ -24,7 +24,39 @@
 
 		if($test == true){
 			$img_new_name = time() . $img_name;
-			move_uploaded_file($img_tmp_path, BASE_FILE . "/assets/images/" . $img_new_name);
+
+			list($sirina, $visina) = getimagesize($img_tmp_path);
+			$smallSirina= 150;
+			$mediumSirina= 200;
+			$postojecaSlika = null;
+			if( $img_type== "image/jpeg" ){ 
+				$postojecaSlika= imagecreatefromjpeg($img_tmp_path); 
+			}elseif( $img_type== "image/gif" ){
+			  $postojecaSlika= imagecreatefromgif($img_tmp_path); 
+			}elseif( $img_type== "image/png" ){
+			 $postojecaSlika= imagecreatefrompng($img_tmp_path);
+			}
+
+			$smallPrazna = imagecreatetruecolor($smallSirina, ($smallSirina / $sirina) * $visina);
+			imagecopyresampled($smallPrazna, $postojecaSlika, 0, 0, 0, 0, $smallSirina, ($smallSirina / $sirina) * $visina, $sirina, $visina);
+			$novaSmall = $smallPrazna;
+
+			$mediumPrazna = imagecreatetruecolor($mediumSirina, ($mediumSirina / $sirina) * $visina);
+			imagecopyresampled($mediumPrazna, $postojecaSlika, 0, 0, 0, 0, $mediumSirina, ($mediumSirina / $sirina) * $visina, $sirina, $visina);
+			$novaMedium = $mediumPrazna;
+
+			if( $img_type== "image/jpeg" ){
+			  imagejpeg($novaSmall,BASE_FILE . "/assets/images/small_" . $img_new_name,75);
+			  imagejpeg($novaMedium,BASE_FILE . "/assets/images/medium_" . $img_new_name,75);
+			}elseif( $img_type== "image/gif" ){
+			  imagegif($novaSmall,BASE_FILE . "/assets/images/small_" . $img_new_name);
+			  imagegif($novaMedium,BASE_FILE . "/assets/images/medium_" . $img_new_name);
+			}elseif( $img_type== "image/png" ){
+			  imagepng($novaSmall,BASE_FILE . "/assets/images/small_" . $img_new_name);
+			  imagepng($novaMedium,BASE_FILE . "/assets/images/medium_" . $img_new_name); 
+			 }
+
+			move_uploaded_file($img_tmp_path, BASE_FILE . "/assets/images/original_" . $img_new_name);
 
 			$stmt = $conn->prepare(
 				"INSERT INTO product(" .

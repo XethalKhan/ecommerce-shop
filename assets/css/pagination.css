@@ -1,0 +1,8 @@
+#pagination{
+	margin-top:15px;
+	margin-bottom: 15px;
+}
+
+.pagination-link{
+	display: inline-block;
+}

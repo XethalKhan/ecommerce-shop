@@ -90,19 +90,12 @@
 	<div id="content" class="row">
 		<div id="main" class="col-sm-9">
 			<?php 
+				require_once("models/product/functions.php");
 				$c = "";
-				$catAdd = "cat_id = cat_id";
 				if(isset($_GET["id"]) && !empty($_GET["id"])){
 					$c = $_GET["id"];
-					$catAdd = "cat_id = :cat_id";
 				}
-				$query = "SELECT * FROM product WHERE " . $catAdd;
-				$stmt = $conn->prepare($query);
-				if(isset($_GET["id"]) && !empty($_GET["id"])){
-					$stmt->bindParam(":cat_id", $c);
-				}
-				$stmt->execute();
-				$rs=$stmt->fetchall();
+				$rs = product_pagination(0, $c);
 				$i = 0;
 				foreach($rs as $prod){
 
@@ -137,6 +130,21 @@
 					$i = $i + 1;
 				}
 			?>
+			<div class="row" id="pagination">
+				<div class="col-sm-12 text-center">
+					<?php  
+						$paged = product_pagination_number();
+						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">|&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+						for($i = 0; $i < 6 && $i < $paged; $i++):
+					?>
+						<span class="product-pagination pagination-link text-center" data-pag=<?php echo "\"{$i}\"";?>><?php echo ($i + 1);?></span>&nbsp;&nbsp;&nbsp;
+					<?php endfor;
+						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
+						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"{$paged}\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;";
+					?>
+				</div>
+			</div>
 		</div>
 		<div id="asideSearch" class="col-sm-3">
 			<div class="row text-center">

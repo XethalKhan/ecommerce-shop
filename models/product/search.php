@@ -1,8 +1,7 @@
 <?php 
 	session_start();
 
-	$query = "SELECT id, name, unit_price, cat_id, img FROM product";
-
+	$pagination = $_POST["pagination"];
 	$name = $_POST["name"];
 	$maxPrice = $_POST["maxPrice"];
 	$minPrice = $_POST["minPrice"];
@@ -10,52 +9,15 @@
 	$discount = $_POST["discount"];
 	$stock = $_POST["stock"];
 
-	if(!empty($name)){
-		$query = $query . " WHERE name = :name";
-	}else{
-		$query = $query . " WHERE name = name";
-	}
-
-	if(!empty($maxPrice)){
-		$query = $query . " AND unit_price <= :maxPrice";
-	}
-
-	if(!empty($minPrice)){
-		$query = $query . " AND unit_price >= :minPrice";
-	}
-
-	if(!empty($cat)){
-		$query = $query . " AND cat_id = :cat";
-	}
-
-	if($discount == "true"){
-		$query = $query . " AND discount > 0";
-	}
-
-	if($stock == "true"){
-		$query = $query . " AND unit_in_stock > 0";
-	}
-
-	$stmt = $conn->prepare($query);
-
-	if(!empty($name)){
-		$stmt->bindParam(":name", $name);
-	}
-
-	if(!empty($maxPrice)){
-		$stmt->bindParam(":maxPrice", $maxPrice);
-	}
-
-	if(!empty($minPrice)){
-		$stmt->bindParam(":minPrice", $minPrice);
-	}
-
-	if(!empty($cat)){
-		$stmt->bindParam(":cat", $cat);
-	}
-
-	$stmt->execute();
-	$rs=$stmt->fetchAll();
+	$rs = product_pagination(
+		$pagination,
+		$cat, 
+		$name, 
+		$maxPrice, 
+		$minPrice, 
+		$discount, 
+		$stock
+	);
 	if(count($rs) > 0){
 		http_response_code(200);
 		echo json_encode($rs);

@@ -73,5 +73,6 @@
     <link rel="stylesheet" href="assets/css/form.css">
     <link rel="stylesheet" href="assets/css/search.css">
     <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/pagination.css">
     <!--/STYLESHEET-->
 </head>

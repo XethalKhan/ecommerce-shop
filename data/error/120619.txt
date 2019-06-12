@@ -1,0 +1,11 @@
+08:36:22	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+08:36:27	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+08:37:14	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+08:38:48	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:38:52	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:40:05	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:40:28	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:42:27	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:44:50	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:45:16	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1
+08:45:21	SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''0', 15' at line 1

@@ -344,6 +344,7 @@ $(document).ready(function(){
 			type: "post",
 			dataType: "json",
 			data: {
+				pagination: 0,
 				name: name,
 				maxPrice: maxPrice,
 				minPrice: minPrice,
@@ -417,6 +418,11 @@ $(document).ready(function(){
 		//</AJAX call for product search>
 	});
 	//</Searching products on product-list page with AJAX>
+
+	$("#pagination").on("click", ".product-pagination", function(e){
+		e.preventDefault();
+		console.log($(this).data("pag"));
+	});
 
 	//<Searching orders on order-list page with AJAX>
 	$("#btnSearchOrders").click(function(){

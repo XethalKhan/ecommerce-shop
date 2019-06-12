@@ -55,6 +55,7 @@
 			break;
 		}
 		case "product":{
+			require_once("models/product/functions.php");
 			switch($action){
 				case "insert":{
 					require_once("models/product/insert.php");

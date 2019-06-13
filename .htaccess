@@ -1,4 +1,5 @@
 RewriteEngine On
+RewriteBase /
 
 #Rule 1: Look for the article title
 RewriteRule   ^([a-z-]+)/?$   index.php?page=$1   [L]
@@ -14,3 +15,6 @@ RewriteRule   ^([a-z-]+)/([a-z-]+)$   api.php  [L]
 
 #Rule 5: API model/action with id
 RewriteRule   ^([a-z-]+)/([a-z-]+)/([0-9]+)$   api.php?id=$3 [L]
+
+php_flag log_errors on
+php_value error_log HOME-PATH/public_html/php_errors/PHP_errors.log

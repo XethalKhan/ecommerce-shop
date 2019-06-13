@@ -1,5 +1,4 @@
 <?php 
-
 	function category_insert(
 		$name,        	//CATEGORY NAME
 		$desc   		//CATEGORY DESCRIPTION

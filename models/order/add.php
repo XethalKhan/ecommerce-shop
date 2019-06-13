@@ -1,5 +1,4 @@
 <?php 
-	session_start();
 	if(isset($_POST["pid"])){
 		if(isset($_SESSION["uid"])){
 			$pid = $_POST["pid"];

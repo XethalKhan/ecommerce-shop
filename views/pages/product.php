@@ -10,7 +10,7 @@
 			?>
 			<div class="row profileRow">
 				<div class="col-sm-4 text-center product-img">
-						<?php echo "<img src=\"assets/images/" . $rs->img . "\" width=\"auto\" height=\"250\"/>"; ?>
+						<?php echo "<img src=\"assets/images/medium_" . $rs->img . "\" width=\"auto\" height=\"250\"/>"; ?>
 				</div>
 				<div class="col-sm-8 text-center">
 					<div class="row profileRow">

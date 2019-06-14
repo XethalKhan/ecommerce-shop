@@ -140,8 +140,8 @@
 					?>
 						<span class="product-pagination pagination-link text-center" data-pag=<?php echo "\"{$i}\"";?>><?php echo ($i + 1);?></span>&nbsp;&nbsp;&nbsp;
 					<?php endfor;
-						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
-						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"{$paged}\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;";
+						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"" . ($paged > 1 ? 1 : 0) . "\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
+						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"" . ($paged > 1 ? $paged : 0) . "\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;";
 					?>
 				</div>
 			</div>

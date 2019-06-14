@@ -1,12 +1,11 @@
-/home	12
-/product-list	11
 1	
 1	
 1	
 1	
 1	
-1	
+/product-list	10
 /about	3
+/home	10
 /login	2
 /logout	1
 /user/29	1

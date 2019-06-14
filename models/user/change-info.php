@@ -39,5 +39,5 @@
 		$msg = "Bad request, try again";
 	}
 	$_SESSION["msg"] = $msg;
-	header("LOcation: http://" . BASE_HREF . "/user-change/" . $_POST["uid"]);
+	header("Location: http://" . BASE_HREF . "/user-change/" . $_POST["uid"]);
 ?>

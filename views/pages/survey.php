@@ -44,20 +44,15 @@
 						<span class="err" id="prodTypeErr"></span></h4>
 				</div>
 				<div class="col-md-8 text-center">
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="1"/>Education&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="2"/>Energy&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="3"/>Green Tech&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="4"/>Fashion&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="5"/>Food&nbsp;&nbsp;&nbsp;<br/>
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="6"/>Beverages&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="7"/>Health&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="8"/>Fitness&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="9"/>Home&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="10"/>Phone&nbsp;&nbsp;&nbsp;<br/>
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="11"/>Accessories&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="12"/>Art&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="13"/>Tabletop games&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="chkProdType" name="chkProdType[]" value="14"/>Video games&nbsp;&nbsp;&nbsp;
+					<?php  
+						$stmt = $conn->prepare("SELECT * FROM category");
+						$stmt->execute();
+						$rs = $stmt->fetchAll();
+						foreach($rs as $prod_type):
+					?>
+						<input type="checkbox" id="chkProdType" name="chkProdType[]" value=<?php echo "\"" . $prod_type->id . "\""; ?>/>
+							<?php echo $prod_type->name; ?>&nbsp;&nbsp;&nbsp;
+					<?php endforeach;?>
 				</div>
 			</div>
 			<div class="row formRow">

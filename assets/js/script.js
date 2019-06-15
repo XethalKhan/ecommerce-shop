@@ -565,7 +565,7 @@ $(document).ready(function(){
 						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (pag + 1) + "\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
 				}
 
-				app = app + "<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (data["num"] > 1 ? data["num"] : 0) + "\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;</div></div>";
+				app = app + "<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (data["num"] > 1 ? data["num"] - 1 : 0) + "\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;</div></div>";
 				$("#main").html(app);		//append formed html string from products
 
 			},

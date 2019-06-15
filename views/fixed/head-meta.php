@@ -12,39 +12,72 @@
                 case "author":
                     echo "Author";
                     break;
-                case "home":
-                    echo "Home";
+                case "categories":
+                    echo "Admin panel | Categories";
                     break;
-                case "login":
-                    echo "Log in";
+                case "change-pass":
+                    echo "Change password";
                     break;
-                case "order-list":
-                    echo "Admin panel - list of all orders";
-                    break;
-                case "order":
-                    echo "Order details";
-                    break;
-                case "product-list":
-                    echo "Products";
-                    break;
-                case "sign-up":
-                    echo "Sign up";
-                    break;
-                case "survey":
-                    echo "Survey";
-                    break;
-                case "ticket-list":
-                    echo "Admin panel - list of all tickets";
-                    break;
-                case "user-list":
-                    echo "Admin panel - list of all users";
-                    break;
-                case "user":
-                    echo "User profile";
-                    break;
-                default:
-                    echo "Home";
-                    break;
+            case "home":
+                echo "Home";
+                break;
+            case "login":
+                echo "Login";
+                break;
+            case "new-product":
+                echo "Admin panel | New product";
+                break;
+            case "new-ticket":
+                echo "New ticket";
+                break;
+            case "order":
+                echo "Order #" . $_GET["id"];
+                break;
+            case "order-complete":
+                echo "Complete order";
+                break;
+            case "order-list":
+                echo "Admin panel | Orders";
+                break;
+            case "product":
+                echo "Product";
+                break;
+            case "product-change":
+                echo "Modify product";
+                break;
+            case "product-list":
+                echo "Products";
+                break;
+            case "session-list":
+                echo "Admin panel | Active sessions";
+                break;
+            case "sign-up":
+                echo "Sign up";
+                break;
+            case "survey":
+                echo "Survey";
+                break;
+            case "survey-result":
+                echo "Admin panel | Survey result";
+                break;
+            case "statistics":
+                echo "Admin panel | Page statistics";
+                break;
+            case "ticket-list":
+                echo "Admin panel | All tickets";
+                break;
+            case "user":
+                echo "User profile";
+                break;
+            case "user-change":
+                echo "Modify user";
+                break;
+            case "user-list":
+                echo "Admin panel | User list";
+                break;
+            default:
+                echo "Online book store";
+                break;
             }
         ?>
     </title>

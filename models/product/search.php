@@ -23,7 +23,7 @@
 		echo json_encode("Not found");
 	}else{
 		http_response_code(200);
-		echo json_encode(["data" => $rs, "num" => product_pagination_number()]);
+		echo json_encode(["data" => $rs, "num" => product_pagination_number($cat, $name, $maxPrice, $minPrice, $discount, $stock)]);
 	}
 
 ?>

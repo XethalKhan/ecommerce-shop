@@ -50,7 +50,7 @@
 					foreach($orderQ as $prod){
 		    			echo 
 		    				"<tr>" .
-			    				"<td>" . substr($prod["name"], 0, 30) . "</td>" .
+			    				"<td>" . $prod["name"] . "</td>" .
 								"<td>" . $prod["number"] . "</td>" .
 			    				"<td>" . number_format((float)$prod["price"], 2, ",", ".") ."</td>" .
 			    				"<td>" . ((double)$prod["number"] * ((double)$prod["price"]) * (100 - (double)$prod["discount"]) / 100) ."</td>" .

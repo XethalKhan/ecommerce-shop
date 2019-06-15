@@ -133,7 +133,7 @@
 			<div class="row">
 				<div id="pagination" class="col-sm-12 text-center">
 					<?php  
-						$paged = product_pagination_number();
+						$paged = product_pagination_number(isset($_GET["id"]) ? $_GET["id"] : 0);
 						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">|&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
 						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
 						for($i = 0; $i < 6 && $i < $paged; $i++):

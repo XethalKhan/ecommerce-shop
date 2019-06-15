@@ -1,4 +1,4 @@
-<form id="formLogin" method="post" action="utl/login.php" clas="form-inline">
+<form id="formLogin" method="post" action=<?php echo "\"http://" . BASE_HREF . "/user/login\"";?>>
 	<div class="row formRow">
 		<div class="col-md-12 text-center">
 			<img src = "assets/img/logo.png" width="150px" height="150px"/>

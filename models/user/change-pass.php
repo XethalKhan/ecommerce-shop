@@ -28,7 +28,7 @@
 		$newPass = md5($newPass);
 		if($status == true){
 			if(user_password_update($user, $newPass)){
-				http_response_code(203);
+				http_response_code(204);
 				echo json_encode("SUCCESS");
 			}else{
 				http_response_code(500);

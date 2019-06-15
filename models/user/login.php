@@ -27,6 +27,10 @@
 				exit;
 			}else{
 				user_wrong_increase($user);
+				$info = user_data($user);
+				if($info !== false){
+					mail($user->email, "E-commerce | Wrong password", "Wrong password entered at " . date("d.m.Y h:i:s") . ". Did you try to login?");
+				}
 				$_SESSION['msg'] = "Wrong password, please try again";
 				header("Location: http://" . BASE_HREF . "/login");
 				exit;

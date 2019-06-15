@@ -6,8 +6,7 @@
 		$desc = $_POST["desc"];
 
 		if(category_insert($name, $desc) == true){
-			http_response_code(200);
-			echo json_encode("Success");
+			http_response_code(201);
 		}else{
 			http_response_code(500);
 			echo json_encode("Internal server error");

@@ -246,7 +246,9 @@ $(document).ready(function(){
 					newRep: newPassRep
 				},
 				success: function(data, txt, xhr){
-					window.open("http://" + BASE_HREF + "user/logout", "_self");
+					if(xhr.status == 204){
+						window.open("http://" + BASE_HREF + "user/logout", "_self");
+					}
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 400){
@@ -292,8 +294,10 @@ $(document).ready(function(){
 					txtTicket: txt
 				},
 				success: function(data, txt, xhr){
-					alert("Your ticket number is " + data);
-					$("#txtTicket").val("");
+					if(xhr.status == 201){
+						alert("Your ticket number is " + data);
+						$("#txtTicket").val("");
+					}
 				},
 				error: function(xhr, status, error){
 					$(".err").text("");
@@ -738,7 +742,7 @@ $(document).ready(function(){
 				id: tid
 			},
 			success: function(data, txt, xhr){
-				if(xhr.status == 200){
+				if(xhr.status == 204){
 
 					let id = $("#tbID").val();
 					let date = $("#tbTicketDate").val();
@@ -797,7 +801,7 @@ $(document).ready(function(){
 				id: tid
 			},
 			success: function(data, txt, xhr){
-				if(xhr.status == 200){
+				if(xhr.status == 204){
 
 					let id = $("#tbID").val();
 					let date = $("#tbTicketDate").val();
@@ -834,8 +838,8 @@ $(document).ready(function(){
 							}
 						},
 						error: function(xhr, status, error){
-							if(xhr.status == 404){
-								$("#ticketTable").find("tr:gt(0)").remove();
+							if(xhr.status == 500){
+								alert("Internal server error");
 							}
 						}
 					});
@@ -879,11 +883,13 @@ $(document).ready(function(){
 					desc: desc
 				},
 				success: function(data, txt, xhr){
-					console.log(data);
+					if(xhr.status == 201){
+						alert("Success");
+					}
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 401){
-						window.open("login.php", "_self");
+						window.open("http://" + BASE_HREF + "login", "_self");
 					}
 				}
 			});	
@@ -900,11 +906,13 @@ $(document).ready(function(){
 					desc: desc
 				},
 				success: function(data, txt, xhr){
-					console.log(data);
+					if(xhr.status == 204){
+						alert("Success");
+					}
 				},
 				error: function(xhr, status, error){
 					if(xhr.status == 401){
-						window.open("login.php", "_self");
+						window.open("http://" + BASE_HREF + "login", "_self");
 					}
 				}
 			});		
@@ -1185,7 +1193,7 @@ $(document).ready(function(){
 			},
 			error: function(xhr, status, error){
 				if(xhr.status == 401){
-					window.open("login.php", "_self");
+					window.open("http://" + BASE_HREF + "login", "_self");
 				}
 			}
 		})

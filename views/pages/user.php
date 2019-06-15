@@ -216,7 +216,7 @@
 			$rs=$stmt->fetchall();
 			echo "<li><h3>Tickets pending</h3></li>";
 			foreach($rs as $ticket){
-				echo "<li><a href=\"order.php?oid=" . $ticket->id .
+				echo "<li><a href=\"http://" . BASE_HREF . "/ticket/" . $ticket->id .
 						 "\">Ticket #" . $ticket->id . 
 						 " Created:" . date("d.m.Y", strtotime($ticket->date)) . 
 					"</a></li>";

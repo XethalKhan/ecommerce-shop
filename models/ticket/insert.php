@@ -15,11 +15,12 @@
 			if($status = true){
 				$id = ticket_insert($uid, $txt);
 				if($id > 0){
-					http_response_code(200);
+					http_response_code(201);
 					echo json_encode($id); 
 				}else{
 					http_response_code(500);
-					echo json_encode("Internal server error"); 
+					$errArr[] = array("id" => "txtErr", "msg" => "Internal server error");
+					echo json_encode($errArr);
 				}
 			}else{
 				http_response_code(400);

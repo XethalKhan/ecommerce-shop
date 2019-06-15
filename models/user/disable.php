@@ -13,7 +13,7 @@
 				header("Location: http://" . BASE_HREF . "/user/" . $_GET["id"]);
 			}else{
 				if(user_disable($uid)){
-					http_response_code(200);
+					http_response_code(204);
 					if($_SESSION["uid"] == $_GET["uid"]){
 						session_destroy();
 						require_once(BASE_FILE . "/models/user/logout.php");

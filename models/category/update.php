@@ -7,7 +7,7 @@
 		$desc = $_POST["desc"];
 
 		if(category_update($id, $name, $desc) == true){
-			http_response_code(200);
+			http_response_code(204);
 			echo json_encode("Success");
 		}else{
 			http_response_code(500);

@@ -53,8 +53,7 @@
 				$name = date("dmy") . ".txt";
 				$log = file(BASE_FILE . "/data/session/" . $name);
 				$cnt = count($log);
-				$i = $cnt < 15 ? 0 : $cnt - 15;
-				for(; $i < $cnt; $i++){
+				for($i = $cnt - 1; $cnt - $i == 15 || $i >= 0; $i--){
 					$row = trim($log[$i]);
 					$row = explode("\t", $row);
 					echo "<tr>" .

@@ -2,14 +2,14 @@
 	<div id="footerLeft" class="col-sm-6 text-center">
 		<div class="row">
 			<ul class="col-md-6">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="products.php">Products</a></li>
-				<li><a href="survey.php">Survey</a></li>
+				<li><a href=<?php echo "http://" . BASE_HREF . "/home"; ?>>Home</a></li>
+				<li><a href=<?php echo "http://" . BASE_HREF . "/product-list"; ?>>Products</a></li>
+				<li><a href=<?php echo "http://" . BASE_HREF . "/survey"; ?>>Survey</a></li>
 			</ul>
 			<ul class="col-md-6">
-				<li><a href="about.php">About</a></li>
+				<li><a href=<?php echo "http://" . BASE_HREF . "/about"; ?>>About</a></li>
 				<li><a href="">Docs</a></li>
-				<li><a href="author.php">Author</a></li>
+				<li><a href=<?php echo "http://" . BASE_HREF . "/author"; ?>>Author</a></li>
 			</ul>
 		</div>
 	</div>

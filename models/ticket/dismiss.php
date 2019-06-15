@@ -4,8 +4,7 @@
 		$id = $_POST["id"];
 
 		if(dismiss_ticket($id) == true){
-			http_response_code(200);
-			echo json_encode("Success");
+			http_response_code(204);
 		}else{
 			http_response_code(500);
 			echo json_encode("Internal server error");

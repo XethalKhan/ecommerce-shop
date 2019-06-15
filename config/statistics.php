@@ -40,32 +40,32 @@
 		if(file_exists(BASE_FILE . "/data/statistics/total.txt")){
 			$total_stats = file(BASE_FILE . "/data/statistics/total.txt");
 
-			$s = fopen(BASE_FILE . "/data/statistics/total.txt", "w");
+			$ts = fopen(BASE_FILE . "/data/statistics/total.txt", "w");
 			$found = false;
-			$string = "";
+			$tstring = "";
 
 			foreach($total_stats as $row){
 				$row = explode("\t", trim($row));
 				if($row[0] == $page){
 					$cnt = intval($row[1]) + 1;
 					$found = true;
-					$string = $string . $row[0] . "\t" . $cnt . "\n";
+					$tstring = $tstring . $row[0] . "\t" . $cnt . "\n";
 				}else{
-					$string = $string . $row[0] . "\t" . $row[1] . "\n";
+					$tstring = $tstring . $row[0] . "\t" . $row[1] . "\n";
 				}
 			}
 
 			if($found == false){
-				$string = $string . $page . "\t1\n";
+				$tstring = $tstring . $page . "\t1\n";
 			}		
 
-			fwrite($s, $string);
+			fwrite($ts, $tstring);
 
-			fclose($s);
+			fclose($ts);
 		}else{
-			$s = fopen(BASE_FILE . "/data/statistics/total.txt", "a");
-			fwrite($s, $page . "\t1\n");
-			fclose($s);
+			$ts = fopen(BASE_FILE . "/data/statistics/total.txt", "a");
+			fwrite($ts, $page . "\t1\n");
+			fclose($ts);
 		}
 		//</TOTAL STATISTICS>
 	}

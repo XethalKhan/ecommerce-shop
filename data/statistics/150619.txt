@@ -1,11 +1,6 @@
-1	
-1	
-1	
-1	
-1	
-/product-list	10
-/about	3
-/home	10
+/product-list	13
+/about	4
+/home	18
 /login	2
 /logout	1
 /user/29	1
@@ -13,3 +8,10 @@
 /survey	3
 /product-list/1	3
 /product-list/4	1
+/order-list	6
+/admin	11
+/session-list	2
+/statistics	19
+/user-list	1
+/product/4	2
+/product-change/4	4

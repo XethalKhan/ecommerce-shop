@@ -1,3 +1,4 @@
+<!--
 <div id="search" class="row">
 	<div class="col-lg-12">
 		<form id="formSearch" action="" method="post">
@@ -72,6 +73,7 @@
 		</form>
 	</div>
 </div>
+-->
 <div id="content" class="row table-responsive">
 	<table class="table table-hover text-center" id="userTable">
 		<thead>

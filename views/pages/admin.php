@@ -28,8 +28,8 @@
 		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/session-list\"";?>>
 			<h2>SESSIONS</h2>
 		</a>
-		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/session-list\"";?>>
-			<h2>CATEGORIES</h2>
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/statistics\"";?>>
+			<h2>STATISTICS</h2>
 		</a>
 	</div>
 	<div id="tickets" class="row">

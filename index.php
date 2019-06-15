@@ -78,6 +78,9 @@
 			case "survey-result":
 				require_once("views/pages/survey-result.php");
 				break;
+			case "statistics":
+				require_once("views/pages/statistics.php");
+				break;
 			case "ticket-list":
 				require_once("views/pages/ticket-list.php");
 				break;

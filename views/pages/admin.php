@@ -32,6 +32,11 @@
 			<h2>STATISTICS</h2>
 		</a>
 	</div>
+	<div class="row admin-row">
+		<a class="col-sm-6 text-center admin-cat" href=<?php echo "\"http://" . BASE_HREF . "/product/excel\"";?>>
+			<h2>VALUATION (EXCEL)</h2>
+		</a>
+	</div>
 	<div id="tickets" class="row">
 		<table id="tickets-table" class="table table-hover text-center">
 			<thead>

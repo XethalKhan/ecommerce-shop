@@ -59,6 +59,10 @@
 		case "product":{
 			require_once("models/product/functions.php");
 			switch($action){
+				case "excel":{
+					require_once("models/product/excel.php");
+					break;
+				}
 				case "insert":{
 					require_once("models/product/insert.php");
 					break;

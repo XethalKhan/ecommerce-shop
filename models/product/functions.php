@@ -151,4 +151,36 @@
 		}
 	}
 
+	function product_valuation(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare(
+				"SELECT p.name AS product, c.name AS category, SUM(od.quantity) AS quantity, SUM(od.price * od.quantity * ((100 - od.discount) / 100)) AS value " .
+				"FROM product AS p " .
+				"INNER JOIN category AS c " .
+				"ON p.cat_id = c.id " .
+				"INNER JOIN order_detail AS od " .
+				"ON od.p_id = p.id " .
+				"GROUP BY c.name, p.name"
+			);
+			$stmt->execute();
+			$rs = $stmt->fetchAll();
+			if($rs){
+				return $rs;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
 ?>

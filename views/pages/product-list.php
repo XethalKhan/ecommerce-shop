@@ -130,8 +130,8 @@
 					$i = $i + 1;
 				}
 			?>
-			<div class="row" id="pagination">
-				<div class="col-sm-12 text-center">
+			<div class="row">
+				<div id="pagination" class="col-sm-12 text-center">
 					<?php  
 						$paged = product_pagination_number();
 						echo "<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">|&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";

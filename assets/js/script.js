@@ -353,9 +353,9 @@ $(document).ready(function(){
 				stock: stock
 			},
 			//<on success display products we find>
-			success: function(data, txt, xhr){	
+			success: function(data, txt, xhr){
 				$("#main").html("");			//deleting all products
-				let cnt = data.length;			//number of found products
+				let cnt = data["data"].length;			//number of found products
 				let app = "";					//html string to insert in #main after data is properly formed in html
 				for(let i = 0; i< cnt; i++){
 					//<begin new row of products>
@@ -368,19 +368,19 @@ $(document).ready(function(){
 						"<div class=\"search-prod col-sm-4\">" +
 							//<product image>
 							"<div class=\" text-center\">" +
-								"<img src=\"assets/images/" + data[i]["img"] + "\" width=\"auto\" height=\"150\"/>" +
+								"<img src=\"assets/images/small_" + data["data"][i]["img"] + "\" width=\"auto\" height=\"150\"/>" +
 							"</div>" +
 							//</product image>
 							"<div class=\"row search-details\">" +
 								//<product name>
 								"<div class=\"col-sm-9 text-center\">" +
-									"<h6>" + data[i]["name"] + "</h6>" +		
+									"<h6>" + data["data"][i]["name"] + "</h6>" +		
 								"</div>" +
 								//</product name>
 								//<product price>
 								"<div class=\"col-sm-3 text-center\">" +
 									"<h6 class=\"search-price\">" +
-										"$" + parseFloat(Math.round(data[i]["unit_price"] * 100) / 100).toFixed(2) + 
+										"$" + parseFloat(Math.round(data["data"][i]["unit_price"] * 100) / 100).toFixed(2) + 
 									"</h6>" +
 								"</div>" +
 								//</product price>
@@ -388,13 +388,13 @@ $(document).ready(function(){
 							"<div class=\"row text-center product-links\">" +
 								//<product details>
 								"<div class=\"col-sm-6\">" +
-									"<a href=\"prod.php?pid=" + data[i]["id"] + "\" class=\"search-detail\">Details</a>" +
+									"<a href=\"prod.php?pid=" + data["data"][i]["id"] + "\" class=\"search-detail\">Details</a>" +
 								"</div>" +
 								//</product details>
 								//<buy product>
 								"<div class=\"col-sm-6\">" +
-									"<a href=\"\" class=\"product-action\" data-pid=\"" +  data[i]["id"] +
-									 "\" data-cat=\"" +  data[i]["cat_id"] + "\">Purchase</a>" +
+									"<a href=\"\" class=\"product-action\" data-pid=\"" +  data["data"][i]["id"] +
+									 "\" data-cat=\"" +  data["data"][i]["cat_id"] + "\">Purchase</a>" +
 								"</div>" +	
 								//</buy product>
 							"</div>" +
@@ -406,6 +406,19 @@ $(document).ready(function(){
 					}
 					//</end row of products for every 3rd product or for last product>
 				}
+				let p = data["num"];
+				app = app +
+					"<div class=\"row\"><div id=\"pagination\" class=\"col-sm-12 text-center\">" +
+					"<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">|&lt;&lt;</span>&nbsp;&nbsp;&nbsp;" +
+					"<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+				for(let i = 0; i < 6 && i < p; i++){
+					app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + i + "\">" + (i + 1) + "</span>&nbsp;&nbsp;&nbsp;";
+				}
+				app = app +
+					"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (p > 1 ? 1 : 0) + "\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;" +
+					"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (p > 1 ? p : 0) + "\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;</div></div>";
+
 				$("#main").html(app);		//append formed html string from products
 			},
 			//</on success display products we find>
@@ -419,9 +432,151 @@ $(document).ready(function(){
 	});
 	//</Searching products on product-list page with AJAX>
 
-	$("#pagination").on("click", ".product-pagination", function(e){
+	$("#main").on("click", ".product-pagination", function(e){
 		e.preventDefault();
-		console.log($(this).data("pag"));
+		let pag = $(this).data("pag");
+
+		let name = $("#tbName").val(); 								//product name
+		let maxPrice = $("#tbMaxPrice").val();						//max product price
+		let minPrice = $("#tbMinPrice").val();						//min product price
+		let cat = $("#ddlSearchCategory option:selected").val();	//category ID
+		let discount = $("#cbxDiscount").prop("checked");			//product on discount
+		let stock = $("#cbxStock").prop("checked");					//product on stock
+
+
+		$(".err").text("");											//clear errors for all specific inputs
+		$("#errList").text("");										//clear error list
+
+		//<checking if max product price is in decimal format if it is entered>
+		if(!(/(^[+|-]?\d*\.?\d*[0-9]+\d*$)|(^[+|-]?[0-9]+\d*\.\d*$)/.test(maxPrice)) && maxPrice != ""){
+			maxPrice = "";
+			$("#errList").append("Value for max price is not valid number!<br/>");
+			$("#maxPErr").text("*");
+		}
+		//</checking if max product price is in decimal format if it is entered>
+
+		//<checking if min product price is in decimal format if it is entered>
+		if(!(/(^[+|-]?\d*\.?\d*[0-9]+\d*$)|(^[+|-]?[0-9]+\d*\.\d*$)/.test(minPrice)) && minPrice != ""){
+			minPrice = "";
+			$("#errList").append("Value for min price is not valid number!<br/>");
+			$("#minPErr").text("*");
+		}
+		//</checking if min product price is in decimal format if it is entered>
+
+		//<AJAX call for product search>
+		$.ajax({
+			url: "http://" + BASE_HREF + "product/search",
+			type: "post",
+			dataType: "json",
+			data: {
+				pagination: pag,
+				name: name,
+				maxPrice: maxPrice,
+				minPrice: minPrice,
+				cat: cat,
+				discount: discount,
+				stock: stock
+			},
+			//<on success display products we find>
+			success: function(data, txt, xhr){	
+				console.log(data);
+				$("#main").html("");			//deleting all products
+				let cnt = data["data"].length;			//number of found products
+				let app = "";					//html string to insert in #main after data is properly formed in html
+				for(let i = 0; i< cnt; i++){
+					//<begin new row of products>
+					if(i%3 == 0){
+						app = app + "<div class=\"row search-row\">";
+					}
+					//</begin new row of products>
+					//<append product>
+					app = app +
+						"<div class=\"search-prod col-sm-4\">" +
+							//<product image>
+							"<div class=\" text-center\">" +
+								"<img src=\"assets/images/small_" + data["data"][i]["img"] + "\" width=\"auto\" height=\"150\"/>" +
+							"</div>" +
+							//</product image>
+							"<div class=\"row search-details\">" +
+								//<product name>
+								"<div class=\"col-sm-9 text-center\">" +
+									"<h6>" + data["data"][i]["name"] + "</h6>" +		
+								"</div>" +
+								//</product name>
+								//<product price>
+								"<div class=\"col-sm-3 text-center\">" +
+									"<h6 class=\"search-price\">" +
+										"$" + parseFloat(Math.round(data["data"][i]["unit_price"] * 100) / 100).toFixed(2) + 
+									"</h6>" +
+								"</div>" +
+								//</product price>
+							"</div>" +
+							"<div class=\"row text-center product-links\">" +
+								//<product details>
+								"<div class=\"col-sm-6\">" +
+									"<a href=\"prod.php?pid=" + data["data"][i]["id"] + "\" class=\"search-detail\">Details</a>" +
+								"</div>" +
+								//</product details>
+								//<buy product>
+								"<div class=\"col-sm-6\">" +
+									"<a href=\"\" class=\"product-action\" data-pid=\"" +  data["data"][i]["id"] +
+									 "\" data-cat=\"" +  data["data"][i]["cat_id"] + "\">Purchase</a>" +
+								"</div>" +	
+								//</buy product>
+							"</div>" +
+						"</div>";
+					//</append product>
+					//<end row of products for every 3rd product or for last product>
+					if(i % 3 == 2 || i + 1 == cnt){
+						app = app + "</div>";
+					}
+					//</end row of products for every 3rd product or for last product>
+				}
+				app = app + 
+					"<div class=\"row\"><div id=\"pagination\" class=\"col-sm-12 text-center\">" +
+					"<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">|&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+				if(pag <= 1){
+					app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"0\">&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+						for(let i = 0; i < 6 && i < data["num"]; i++){
+							app = app +
+								"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + i + "\">" + (i + 1) + "</span>&nbsp;&nbsp;&nbsp";
+						}
+						app = app +
+							"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (data["num"] > 1 ? 1 : 0) + "\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
+				}
+				else if(pag > 1 && pag < data["num"] - 1){
+					app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (pag - 1) + "\">&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+					for(let i = -2; i <= 2 ; i++){
+						app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (pag + i) + "\">" + (pag + i + 1) + "</span>&nbsp;&nbsp;&nbsp;";
+					}
+					app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (pag + 1) + "\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
+				}else{
+					app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (pag - 1) + "\">&lt;&lt;</span>&nbsp;&nbsp;&nbsp;";
+					for(let i = data["num"] < 5 ? 0 : data["num"] - 5; i < data["num"]; i++){
+						app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (i) + "\">" + (i + 1) + "</span>&nbsp;&nbsp;&nbsp;";
+					}
+					app = app +
+						"<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (pag + 1) + "\">&gt;&gt;</span>&nbsp;&nbsp;&nbsp;";
+				}
+
+				app = app + "<span class=\"product-pagination pagination-link text-center\" data-pag=\"" + (data["num"] > 1 ? data["num"] : 0) + "\">&gt;&gt;|</span>&nbsp;&nbsp;&nbsp;</div></div>";
+				$("#main").html(app);		//append formed html string from products
+
+			},
+			//</on success display products we find>
+			//<on error alert>
+			error: function(xhr, status, error){
+				alert(xhr.status);	
+			}
+			//</on error alert>
+		});
+		//</AJAX call for product search>
 	});
 
 	//<Searching orders on order-list page with AJAX>

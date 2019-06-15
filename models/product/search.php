@@ -18,12 +18,12 @@
 		$discount, 
 		$stock
 	);
-	if(count($rs) > 0){
-		http_response_code(200);
-		echo json_encode($rs);
-	}else{
+	if($rs === false){
 		http_response_code(404);
 		echo json_encode("Not found");
+	}else{
+		http_response_code(200);
+		echo json_encode(["data" => $rs, "num" => product_pagination_number()]);
 	}
 
 ?>

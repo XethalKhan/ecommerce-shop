@@ -45,9 +45,7 @@
 										if(isset($_GET["id"])){
 											$slcCat = $_GET["id"];
 										}
-										$stmt = $conn->prepare("SELECT * FROM category");
-										$stmt->execute();
-										$rs=$stmt->fetchall();
+										$rs=get_categories();
 										foreach($rs as $cat){
 											$slc = "";
 											if($slcCat == $cat->id){

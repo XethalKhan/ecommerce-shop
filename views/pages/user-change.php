@@ -4,10 +4,7 @@
 ?>
 	<?php
 
-			$stmt = $conn->prepare("SELECT * FROM user WHERE id = :id");
-			$stmt->bindParam(":id", $id);
-			$stmt->execute();
-			$rs = $stmt->fetch();
+			$rs = get_user_data_id($_GET["id"]);
 	?>
 	<form id="formSignup" method="post" action=<?php echo "'http://" . BASE_HREF."/user/change-info'";?> enctype="multipart/form-data" clas="form-inline">
 		<div class="row formRow">

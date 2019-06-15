@@ -1,9 +1,7 @@
 <div id="content" class="row">
 		<div id="main" class="col-sm-9">
 			<?php 
-					$stmt = $conn->prepare("SELECT * FROM product");
-					$stmt->execute();
-					$rs=$stmt->fetchall();
+					$rs=get_products();
 					foreach($rs as $prod){
 					echo "<div class=\"row product\">" .
 							"<div class=\"col-sm-4 text-center product-img\">" .

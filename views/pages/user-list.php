@@ -86,17 +86,7 @@
 			</thead>
 			<tbody>
 				<?php 
-					$stmt = $conn->prepare(
-						"SELECT " .
-							"id, " .
-							"username, " .
-							"firstname, " .
-							"lastname, " .
-							"email, " .
-							"status " .
-						"FROM `user` ");
-					$stmt->execute();
-					$rs=$stmt->fetchall();
+					$rs=get_users();
 					foreach($rs as $user){
 						switch($user->status){
 							case 0:

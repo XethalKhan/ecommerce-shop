@@ -4,13 +4,8 @@
 	$oid = "";
 
 	if(isset($_GET["id"])){
-		$query = "SELECT c_id AS id FROM `order` WHERE id = :id";
 		$oid = $_GET["id"];
-		$stmt = $conn->prepare($query);
-		$stmt->bindParam(":id", $oid);
-		$stmt->execute();
-		$rs = $stmt->fetch();
-		$cid = $rs->id;
+		$cid = get_user_id_from_order($oid);
 	}else{
 		$test = false;
 	}
@@ -40,28 +35,14 @@
 				</thead>
 				<tbody>
 			<?php 
-				$query = 
-					"SELECT " .
-						"p.id AS id, ". 
-						"p.name AS name, ". 
-						"o.quantity AS quantity, " .
-						"o.price AS price, " .
-						"o.discount AS discount " .
-					"FROM order_detail o " . 
-					"INNER JOIN product p " . 
-					"ON p.id = o.p_id " .
-					"WHERE o.id = :id";
-
-				$stmt = $conn->prepare($query);
-				$stmt->bindParam(":id", $oid);
-				$stmt->execute();
-				$rs=$stmt->fetchall();
+				
+				$rs=get_ordered_products($oid);
 
 
 				foreach($rs as $prod){
 	    			echo 
 	    				"<tr>" .
-		    				"<td>" . substr($prod->name, 0, 30) . "</td>" .
+		    				"<td>" . $prod->name . "</td>" .
 							"<td>" . $prod->quantity . "</td>" .
 		    				"<td>$" . number_format((float)$prod->price, 2, ",", ".") ."</td>" .
 		    				"<td>$" . number_format((double)$prod->quantity * ((double)$prod->price) * (100 - (double)$prod->discount) / 100, 2) ."</td>" .
@@ -75,12 +56,8 @@
 	</div>
 </div>
 <?php 
-		$query = "SELECT * FROM `order` WHERE id = :id";
-		$stmt = $conn->prepare($query);
-		$stmt->bindParam(":id", $oid);
-		$stmt->execute();
-		$rs = $stmt->fetch();
-	?>
+	$rs = get_order($oid);
+?>
 <div class="row">
 	<div class="col-md-3 text-center">
 		<h4 class="signupLabel">Address:</h4>

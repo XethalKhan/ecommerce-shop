@@ -1,39 +1,51 @@
 <?php
 
-include "functions.php";
-
 $val = product_valuation();
-$excel = new COM("Excel.Application");
-$excel->Visible = 1;
-$excel->DisplayAlerts = 1;
-$workbook = $excel->Workbooks->Add();
-$sheet = $workbook->Worksheets('Sheet1');
-$sheet->activate;
+if($val === false){
+    $excel = new COM("Excel.Application");
+    $excel->Visible = 1;
+    $excel->DisplayAlerts = 1;
+    $workbook = $excel->Workbooks->Add();
+    $sheet = $workbook->Worksheets('Sheet1');
+    $sheet->activate;
 
-$br = 1;
-foreach($val as $row){
-    $polje = $sheet->Range("A{$br}");
+    $polje = $sheet->Range("A1");
     $polje->activate;
-    $polje->value = $val->product;
+    $polje->value = "Error";
+}else{
+    $excel = new COM("Excel.Application");
+    $excel->Visible = 1;
+    $excel->DisplayAlerts = 1;
+    $workbook = $excel->Workbooks->Add();
+    $sheet = $workbook->Worksheets('Sheet1');
+    $sheet->activate;
 
-    // U B kolonu upisujemo TITLE
-    $polje = $sheet->Range("B{$br}");
-    $polje->activate;
-    $polje->value = $val->category;
+    $br = 1;
+    foreach($val as $row){
+        $polje = $sheet->Range("A{$br}");
+        $polje->activate;
+        $polje->value = $val->product;
 
-    // U C kolonu upisujemo DESCRIPTION
-    $polje = $sheet->Range("C{$br}");
-    $polje->activate;
-    $polje->value = $val->quantity;
+        // U B kolonu upisujemo TITLE
+        $polje = $sheet->Range("B{$br}");
+        $polje->activate;
+        $polje->value = $val->category;
 
-    // U D kolonu upisujemo TRAILER
-    $polje = $sheet->Range("D{$br}");
-    $polje->activate;
-    $polje->value = $val->value;
+        // U C kolonu upisujemo DESCRIPTION
+        $polje = $sheet->Range("C{$br}");
+        $polje->activate;
+        $polje->value = $val->quantity;
 
-    $br++;
+        // U D kolonu upisujemo TRAILER
+        $polje = $sheet->Range("D{$br}");
+        $polje->activate;
+        $polje->value = $val->value;
+
+        $br++;
+    }
+
+    $workbook->Save();
 }
 
-$workbook->Save();
 
 header("Location: http://" . BASE_HREF . "/admin");

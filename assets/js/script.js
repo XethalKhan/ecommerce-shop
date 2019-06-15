@@ -709,8 +709,8 @@ $(document).ready(function(){
 							'</td>' +
 							'<td>' + data[i]["request"] + '</td>' +														//text
 							'<td>' + 
-								'<a href=\"#\ class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '>Solved</a>' +		//solve ticket
-								'<a href=\"#\ class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '>Dismiss</a>' +	//dismiss ticket
+								'<a href=\"#\" class=\"solve-ticket\" data-id=\"' + data[i]["id"] + '\"">Solved</a><br/>' +		//solve ticket
+								'<a href=\"#\" class=\"dismiss-ticket\" data-id=\"' + data[i]["id"] + '\"">Dismiss</a>' +	//dismiss ticket
 							 '</td>' + 
 						'</tr>');
 				}

@@ -183,4 +183,87 @@
 		}
 	}
 
+	function get_products(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT * FROM product");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			if($rs){
+				return $rs;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function get_product_prices(
+		$prodids
+	){
+		try{
+			global $conn;
+
+			$instmt = "(" . implode(",", $prodids) . ")";
+			$query = "SELECT id, name, unit_price AS price, discount AS discount FROM product WHERE id IN " . $instmt;
+
+			$stmt = $conn->prepare($query);
+			$stmt->execute();
+			$rs=$stmt->fetchall();
+
+			if($rs){
+				return $rs;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function get_product(
+		$pid
+	){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT * FROM product WHERE id = :pid");
+			$stmt->bindParam(":pid", $pid);
+			$stmt->execute();
+			$rs = $stmt->fetch();
+
+			if($rs){
+				return $rs;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
 ?>

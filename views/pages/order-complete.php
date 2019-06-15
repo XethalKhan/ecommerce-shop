@@ -24,12 +24,8 @@
 					foreach($_SESSION["order"] as $key=>$val){
 						$prodids[] = $key;
 					}
-					$instmt = "(" . implode(",", $prodids) . ")";
-					$query = "SELECT id, name, unit_price AS price, discount AS discount FROM product WHERE id IN " . $instmt;
-
-					$stmt = $conn->prepare($query);
-					$stmt->execute();
-					$rs=$stmt->fetchall();
+					
+					$rs=get_product_prices($prodids);
 
 					$orderQ = array();
 					foreach($rs as $names){

@@ -104,4 +104,90 @@
 		}
 	}
 
+	function get_ticket_data(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare(
+				"SELECT " .
+					"t.id AS id, " .
+				    "u.username AS username, " .
+				    "t.date AS date, " .
+				    "t.request AS request " .
+				"FROM `ticket` t " .
+				"INNER JOIN user u " .
+				"ON t.id_c = u.id " . 
+				"WHERE t.status = 0");
+			$stmt->execute();
+			$rs=$stmt->fetchall();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function ticket_search(
+		$id,
+		$date,
+		$customer
+	){
+		try{
+			global $conn;
+			$param = [];
+
+			$query = "SELECT " .
+				"t.id AS id, " .
+			    "u.username AS username, " .
+			    "t.date AS date, " .
+			    "t.request AS request " .
+			"FROM `ticket` t " .
+			"INNER JOIN user u " .
+			"ON t.id_c = u.id " .
+			"WHERE t.status = 0";
+
+			if(!empty($customer)){
+				$query = $query . " AND LOWER(u.username) LIKE ?";
+				$customer = "%" . strtolower($customer) . "%";
+				array_push($param, $customer);
+			}else{
+				$query = $query . " AND u.username = u.username";
+			}
+
+			if(!empty($id)){
+				$query = $query . " AND t.id = ?";
+				array_push($param, trim($id));
+			}
+
+			if(!empty($date)){
+				$query = $query . " AND DATE(t.date) = ?";
+				array_push($param, date('Y-m-d', strtotime($date)));
+			}
+
+			$stmt = $conn->prepare($query);
+
+			$stmt->execute($param);
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
 ?>

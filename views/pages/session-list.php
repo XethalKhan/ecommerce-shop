@@ -89,22 +89,7 @@
 		</thead>
 		<tbody>
 			<?php 
-				$stmt = $conn->prepare(
-					"SELECT " .
-						"u.id, " .
-						"u.username, " .
-						"u.firstname, " .
-						"u.lastname, " .
-						"u.email, " .
-						"s.hash AS hash, " .
-						"g.name AS group_name " .
-					"FROM `user` AS u " .
-					"INNER JOIN `session` AS s " .
-					"ON u.id = s.uid " .
-					"INNER JOIN `grp` AS g " .
-					"ON u.grp = g.id ");
-				$stmt->execute();
-				$rs=$stmt->fetchall();
+				$rs=get_user_session_data();
 				foreach($rs as $user){
 					echo 
 						"<tr>" .

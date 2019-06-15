@@ -416,4 +416,158 @@
 		}
 	}
 
+	function get_user_session_data(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare(
+				"SELECT " .
+					"u.id, " .
+					"u.username, " .
+					"u.firstname, " .
+					"u.lastname, " .
+					"u.email, " .
+					"s.hash AS hash, " .
+					"g.name AS group_name " .
+				"FROM `user` AS u " .
+				"INNER JOIN `session` AS s " .
+				"ON u.id = s.uid " .
+				"INNER JOIN `grp` AS g " .
+				"ON u.grp = g.id ");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+			
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			$conn->rollBack();
+			return false;
+		}
+	}
+
+	function get_user_data_id(
+		$uid
+	){
+		try{
+
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT * FROM user WHERE id = :id");
+			$stmt->bindParam(":id", $uid);
+			$stmt->execute();
+			$rs = $stmt->fetch();
+
+			return $rs;
+
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function get_users(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare(
+				"SELECT " .
+					"id, " .
+					"username, " .
+					"firstname, " .
+					"lastname, " .
+					"email, " .
+					"status " .
+				"FROM `user` ");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function user_search(
+		$username,
+		$firstname,
+		$lastname,
+		$email,
+		$status
+	){
+		try{
+			global $conn;
+
+			$query = "SELECT id, username, firstname, lastname, email, status FROM user";
+			$param = [];
+
+			if(!empty($username)){
+				$query = $query . " WHERE LOWER(username) LIKE ?";
+				$username = "%" . strtolower($username) . "%";
+				array_push($param, $username);
+			}else{
+				$query = $query . " WHERE username = username";
+			}
+
+			if(!empty($firstname)){
+				$query = $query . " AND LOWER(firstname) LIKE ?";
+				$firstname = "%" . strtolower($firstname) . "%";
+				array_push($param, $firstname);
+			}
+
+			if(!empty($lastname)){
+				$query = $query . " AND LOWER(lastname) LIKE ?";
+				$lastname = "%" . strtolower($lastname) . "%";
+				array_push($param, $lastname);
+			}
+
+			if(!empty($email)){
+				$query = $query . " AND LOWER(email) LIKE ?";
+				$email = "%" . strtolower($email) . "%";
+				array_push($param, $email);
+			}
+
+			if($status != -1){
+				$query = $query . " AND status = ?";
+				array_push($param, $status);
+			}
+
+			$stmt = $conn->prepare($query);
+
+			$stmt->execute($param);
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
 ?>

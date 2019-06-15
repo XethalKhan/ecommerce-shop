@@ -178,4 +178,186 @@
 
 	}
 
+	function get_user_id_from_order(
+		$oid
+	){
+		try{
+			global $conn;
+
+			$query = "SELECT c_id AS id FROM `order` WHERE id = :id";
+			$stmt = $conn->prepare($query);
+			$stmt->bindParam(":id", $oid);
+			$stmt->execute();
+			$rs = $stmt->fetch();
+			if($rs){
+				return $rs->id;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function get_ordered_products(
+		$oid
+	){
+		try{
+			global $conn;
+
+			$query = 
+				"SELECT " .
+					"p.id AS id, ". 
+					"p.name AS name, ". 
+					"o.quantity AS quantity, " .
+					"o.price AS price, " .
+					"o.discount AS discount " .
+				"FROM order_detail o " . 
+				"INNER JOIN product p " . 
+				"ON p.id = o.p_id " .
+				"WHERE o.id = :id";
+
+			$stmt = $conn->prepare($query);
+			$stmt->bindParam(":id", $oid);
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			if($rs){
+				return $rs;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function get_order(
+		$oid
+	){
+		try{
+			global $conn;
+
+			$query = "SELECT * FROM `order` WHERE id = :id";
+			$stmt = $conn->prepare($query);
+			$stmt->bindParam(":id", $oid);
+			$stmt->execute();
+			$rs = $stmt->fetch();
+
+			if($rs){
+				return $rs;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function order_search(
+		$customer,
+		$maxF,
+		$minF,
+		$city,
+		$country,
+		$address,
+		$orderDate
+	){
+		try{
+			global $conn;
+
+			$query = "SELECT " .
+					"o.id AS id, " .
+					"u.username AS username, " .
+					"o.freight AS freight, " .
+					"o.order_date AS order_date, " .
+					"o.address AS address, " .
+					"CONCAT(o.city, '/', o.country) AS city " .
+				"FROM `order` o " .
+				"INNER JOIN user u " .
+				"ON u.id = o.c_id";
+
+			$param = [];
+
+			if(!empty($customer)){
+				$query = $query . " WHERE LOWER(u.username) LIKE ?";
+				$customer = "%" . strtolower($customer) . "%";
+				array_push($param, $customer);
+			}else{
+				$query = $query . " WHERE u.username = u.username";
+			}
+
+			if(!empty($maxF)){
+				$query = $query . " AND o.freight <= ?";
+				array_push($param, $maxF);
+			}
+
+			if(!empty($minF)){
+				$query = $query . " AND o.freight >= ?";
+				array_push($param, $minF);
+			}
+
+			if(!empty($city)){
+				$query = $query . " AND LOWER(o.city) LIKE ?";
+				$city = "%" . strtolower($city) . "%";
+				array_push($param, $city);
+			}
+
+			if(!empty($country)){
+				$query = $query . " AND o.country LIKE ?";
+				$country = "%" . strtolower($country) . "%";
+				array_push($param, $country);
+			}
+
+			if(!empty($address)){
+				$query = $query . " AND o.address LIKE ?";
+				$address = "%" . strtolower($address) . "%";
+				array_push($param, $address);
+			}
+
+			if(!empty($orderDate)){
+				$query = $query . " AND o.order_date = ?";
+				array_push($param, date('Y-m-d', strtotime($orderDate)));
+			}
+
+			$stmt = $conn->prepare($query);
+
+			$stmt->execute($param);
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = fopen(BASE_FILE . "/data/error/" . $name . ".txt", "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
 ?>

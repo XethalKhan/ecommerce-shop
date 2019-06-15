@@ -4,11 +4,7 @@
 	<?php 
 			error_reporting(E_ALL);
 
-			$stmt = $conn->prepare("SELECT * FROM product WHERE id = :pid");
-			$pid = $_GET["id"];
-			$stmt->bindParam(":pid", $pid);
-			$stmt->execute();
-			$rs = $stmt->fetch();
+			$rs = get_product($_GET["id"]);
 	?>
 	<form id="formModProd" method="post" enctype="multipart/form-data" <?php echo "action='http://" . BASE_HREF . "/product/update'";?>>
 		<div class="row formRow">
@@ -60,9 +56,7 @@
 				<select name="ddlProdCategory" id="ddlProdCategory" class="form-control">
 					<option value="0">Choose . . .</option>
 					<?php 
-						$cat = $conn->prepare("SELECT * FROM category");
-						$cat->execute();
-						$rsCat=$cat->fetchall();
+						$rsCat=get_categories();
 						foreach($rsCat as $category){
 							$slc = "";
 							if($rs->cat_id == $category->id){

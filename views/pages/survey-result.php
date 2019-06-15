@@ -4,10 +4,7 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			$br = $rs->cnt;
+			$br = survey_count();
 			echo $br;
 		?>
 	</div>
@@ -23,10 +20,27 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE gender = 1");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			$gender = survey_gender();
+			$male = 0;
+			$female = 0;
+			$none = 0;
+
+			foreach($gender as $row){
+				switch($row->gender){
+					case 1:
+						$male = $row->cnt;
+						break;
+					case 2:
+						$female = $row->cnt;
+						break;
+					case -1:
+						$none = $row->cnt;
+						break;
+
+				}
+			}
+
+			echo $male . " (". (double)$male/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -36,10 +50,7 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE gender = 2");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			echo $female . " (". (double)$female/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -49,10 +60,7 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE gender = -1");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			echo $none . " (". (double)$none/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -67,10 +75,30 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE findout = 1");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			$findout = survey_findout();
+			$social = 0;
+			$advertise = 0;
+			$friend = 0;
+			$other = 0;
+
+			foreach($findout as $row){
+				switch($row->findout){
+					case 1:
+						$social = (int)$row->cnt;
+						break;
+					case 2:
+						$advertise = (int)$row->cnt;
+						break;
+					case 3:
+						$friend = (int)$row->cnt;
+						break;
+					case 4:
+						$other = (int)$row->cnt;
+						break;
+
+				}
+			}
+			echo $social . " (". (double)$social/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -80,10 +108,7 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE findout = 2");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			echo $advertise . " (". (double)$advertise/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -93,10 +118,7 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE findout = 3");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			echo $friend . " (". (double)$friend/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -106,10 +128,7 @@
 	</div>
 	<div class="col-sm-4 text-center">
 		<?php 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey WHERE findout = 4");
-			$stmt->execute();
-			$rs=$stmt->fetch();
-			echo $rs->cnt . " (". (double)$rs->cnt/(double)$br*100 . "%)";
+			echo $other . " (". (double)$other/(double)$br*100 . "%)";
 		?>
 	</div>
 </div>
@@ -119,9 +138,7 @@
 	</div>
 </div>
 <?php  
-	$stmt = $conn->prepare("SELECT product, COUNT(*) AS cnt FROM survey GROUP BY product ORDER BY product ASC");
-	$stmt->execute();
-	$rs=$stmt->fetchall();
+	$rs=survey_product_grade();
 	foreach($rs as $grade){
 		echo "<div class=\"row\">" .
 				"<div class=\"col-sm-8 text-center\">" .
@@ -136,9 +153,7 @@
 	</div>
 </div>
 <?php  
-	$stmt = $conn->prepare("SELECT delivery, COUNT(*) AS cnt FROM survey GROUP BY delivery ORDER BY delivery ASC");
-	$stmt->execute();
-	$rs=$stmt->fetchall();
+	$rs=survey_delivery_grade();
 	foreach($rs as $grade){
 		echo "<div class=\"row\">" .
 				"<div class=\"col-sm-8 text-center\">" .
@@ -153,60 +168,11 @@
 	</div>
 </div>
 <?php  
-	$stmt = $conn->prepare("SELECT val, COUNT(*) AS cnt FROM survey_cbx GROUP BY val ORDER BY val ASC");
-	$stmt->execute();
-	$rs=$stmt->fetchall();
+	$rs=survey_product_types();
 	foreach($rs as $grade){
-		$type = "";
-		switch($grade->val){
-			case "1":
-				$type = "Education";
-				break;
-			case "2":
-				$type = "Energy";
-				break;
-			case "3":
-				$type = "Green Tech";
-				break;
-			case "4":
-				$type = "Fashion";
-				break;
-			case "5":
-				$type = "Food";
-				break;
-			case "6":
-				$type = "Beverages";
-				break;
-			case "7":
-				$type = "Health";
-				break;
-			case "8":
-				$type = "Fitness";
-				break;
-			case "9":
-				$type = "Home";
-				break;
-			case "10":
-				$type = "Phone";
-				break;
-			case "11":
-				$type = "Accessories";
-				break;
-			case "12":
-				$type = "Art";
-				break;
-			case "13":
-				$type = "Tabletop games";
-				break;
-			case "14":
-				$type = "Video games";
-				break;
-			default:
-				$type = "N/A";
-		}
 		echo "<div class=\"row\">" .
 				"<div class=\"col-sm-8 text-center\">" .
-					"<h3>". $type . "</h3>" .
+					"<h3>". $grade->name . "</h3>" .
 				"</div>";
 		echo "<div class=\"col-sm-4 text-center\">" . $grade->cnt . " (". (double)$grade->cnt/(double)$br*100 . "%)</div></div>";
 	}

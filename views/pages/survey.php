@@ -45,9 +45,7 @@
 				</div>
 				<div class="col-md-8 text-center">
 					<?php  
-						$stmt = $conn->prepare("SELECT * FROM category");
-						$stmt->execute();
-						$rs = $stmt->fetchAll();
+						$rs = get_categories();
 						foreach($rs as $prod_type):
 					?>
 						<input type="checkbox" id="chkProdType" name="chkProdType[]" value=<?php echo "\"" . $prod_type->id . "\""; ?>/>

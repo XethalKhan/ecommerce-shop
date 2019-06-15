@@ -63,4 +63,134 @@
 
 	}
 
+	function survey_count(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM survey");
+			$stmt->execute();
+			$rs=$stmt->fetch();
+			
+			if($rs){
+				return $rs->cnt;
+			}else{
+				return false;
+			}
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = file(BASE_FILE . "/data/error/" . $name, "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function survey_gender(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT gender, COUNT(*) AS cnt FROM survey GROUP BY gender");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = file(BASE_FILE . "/data/error/" . $name, "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function survey_findout(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT findout, COUNT(*) AS cnt FROM survey GROUP BY findout");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = file(BASE_FILE . "/data/error/" . $name, "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function survey_product_grade(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT product, COUNT(*) AS cnt FROM survey GROUP BY product ORDER BY product ASC");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = file(BASE_FILE . "/data/error/" . $name, "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function survey_delivery_grade(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT delivery, COUNT(*) AS cnt FROM survey GROUP BY delivery ORDER BY delivery ASC");
+			$stmt->execute();
+			$rs=$stmt->fetchall();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = file(BASE_FILE . "/data/error/" . $name, "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
+	function survey_product_types(){
+		try{
+			global $conn;
+
+			$stmt = $conn->prepare("SELECT c.name, COUNT(*) AS cnt FROM survey_cbx AS s INNER JOIN category AS c ON c.id = s.val GROUP BY val ORDER BY val ASC");
+			$stmt->execute();
+			$rs=$stmt->fetchAll();
+
+			return $rs;
+		}catch(Exception $e){
+			$name = date("dmy");
+			$err_log = file(BASE_FILE . "/data/error/" . $name, "a");
+
+			$time = date("h:i:s");
+			fwrite($err_log, $time . "\t" . $e->getMessage() . "\n");
+			fclose($err_log);
+
+			return false;
+		}
+	}
+
 ?>

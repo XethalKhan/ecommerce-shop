@@ -2,11 +2,7 @@
 	<div id="content" class="row">
 		<div class="col-sm-12">
 			<?php
-				$pid = $_GET["id"];
-				$stmt = $conn->prepare("SELECT * FROM product WHERE id = :id");
-				$stmt->bindParam(":id", $pid);
-				$stmt->execute();
-				$rs=$stmt->fetch();
+				$rs=get_product($_GET["id"]);
 			?>
 			<div class="row profileRow">
 				<div class="col-sm-4 text-center product-img">

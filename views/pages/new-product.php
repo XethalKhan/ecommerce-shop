@@ -36,9 +36,7 @@
 			<select name="ddlProdCategory" id="ddlProdCategory" class="form-control">
 				<option value="0" selected>Choose . . .</option>
 				<?php 
-					$stmt = $conn->prepare("SELECT * FROM category");
-					$stmt->execute();
-					$rs=$stmt->fetchall();
+					$rs=get_categories();
 					foreach($rs as $cat){
 						echo "<option value=\"$cat->id\">".$cat->name."</option>";
 					}

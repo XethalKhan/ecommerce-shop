@@ -5,7 +5,7 @@
 			<li class="col-md-2"><a href=<?php echo "http://" . BASE_HREF . "/product-list"; ?>>Products</a></li>
 			<li class="col-md-2"><a href=<?php echo "http://" . BASE_HREF . "/about"; ?>>About</a></li>
 			<li class="col-md-2"><a href=<?php echo "http://" . BASE_HREF . "/author"; ?>>Author</a></li>
-			<li class="col-md-2"><a href="">Docs</a></li>
+			<li class="col-md-2"><a href="assets/pdf/DOC.pdf">Docs</a></li>
 			<li class="col-md-2"><a href=<?php echo "http://" . BASE_HREF . "/survey"; ?>>Survey</a></li>
 		</ul>
 	</div>

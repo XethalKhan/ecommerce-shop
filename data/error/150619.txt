@@ -1,9 +1,0 @@
-09:11:44	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
-09:12:33	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
-09:13:28	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
-09:41:34	SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
-09:42:24	SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
-09:54:17	SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
-09:54:21	SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
-09:54:46	SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
-09:55:50	SQLSTATE[HY093]: Invalid parameter number: parameter was not defined

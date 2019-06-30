@@ -1,3 +1,0 @@
-/home	4
-/login	2
-/product-list	1

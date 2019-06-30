@@ -8,7 +8,7 @@
 			</ul>
 			<ul class="col-md-6">
 				<li><a href=<?php echo "http://" . BASE_HREF . "/about"; ?>>About</a></li>
-				<li><a href="">Docs</a></li>
+				<li><a href="assets/pdf/DOC.pdf">Docs</a></li>
 				<li><a href=<?php echo "http://" . BASE_HREF . "/author"; ?>>Author</a></li>
 			</ul>
 		</div>
